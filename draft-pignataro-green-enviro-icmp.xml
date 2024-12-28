@@ -273,9 +273,9 @@
         <t>
           The ICMP Environmental Information Extension has the following format.
         </t>
-        <figure anchor="format-fig" align="center"
+        <figure anchor="format-fig" align="left"
                 title="ICMP Environmental Information Extension Format">
-          <artwork xml:space="preserve">
+          <artwork xml:space="preserve" align="left">
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
@@ -345,11 +345,11 @@
           environmental sustainability metric in use, current or future.
         </t>
 
-        <figure anchor="ctype-fig" align="center"
+        <figure anchor="ctype-fig" align="left"
                 title="Environmental Information Extension Object Header">
                 <preamble>The ICMP Environmental Information Extension Object header 
                 has the following format:</preamble>
-          <artwork xml:space="preserve">
+          <artwork xml:space="preserve" align="left">
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -364,8 +364,8 @@
           <t>
             Node Power Draw Sub-Object
             <figure anchor="ctype-1" 
-                    title="Node Power Draw Sub-Object">
-              <artwork xml:space="preserve" >
+                    title="Node Power Draw Sub-Object" align="left">
+              <artwork xml:space="preserve" align="left">
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -688,7 +688,7 @@
         A user at a host with an IP address 198.51.100.27 executes a traceroute to 
         192.0.2.1 and the <xref target="use-case-1" /> shows how the user can be 
         presented with these metrics:
-        <figure anchor="use-case-1" title="Sustainability-Metrics Infused Traceroute">
+        <figure anchor="use-case-1" title="Sustainability-Metrics Infused Traceroute" align="left">
           <artwork xml:space="preserve" >
 > traceroute 192.0.2.1
 Tracing route to 192.0.2.1 over a maximum of 30 hops
