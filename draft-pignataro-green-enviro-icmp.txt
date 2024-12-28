@@ -5,15 +5,15 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                                 J. Parikh
 Intended status: Experimental                        NC State University
-Expires: 21 April 2025                                         R. Bonica
+Expires: 1 July 2025                                           R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                         18 October 2024
+                                                        28 December 2024
 
 
              ICMP Extensions for Environmental Information
-                  draft-pignataro-green-enviro-icmp-00
+                  draft-pignataro-green-enviro-icmp-01
 
 Abstract
 
@@ -46,16 +46,16 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 April 2025.
+   This Internet-Draft will expire on 1 July 2025.
 
 
 
 
 
 
-Pignataro, et al.         Expires 21 April 2025                 [Page 1]
+Pignataro, et al.          Expires 1 July 2025                  [Page 1]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Pignataro, et al.         Expires 21 April 2025                 [Page 2]
+Pignataro, et al.          Expires 1 July 2025                  [Page 2]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
    and quantification of their environmental impact.  Consequently,
@@ -165,9 +165,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                 [Page 3]
+Pignataro, et al.          Expires 1 July 2025                  [Page 3]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
 3.  Motivation
@@ -221,9 +221,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                 [Page 4]
+Pignataro, et al.          Expires 1 July 2025                  [Page 4]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
    *  ICMPv4 Extended Echo Reply [RFC8335]
@@ -277,9 +277,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                 [Page 5]
+Pignataro, et al.          Expires 1 July 2025                  [Page 5]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
          The one's complement checksum of the ICMP extension [RFC4884].
@@ -287,11 +287,12 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
    (2) Environmental Information Object
 
       Length:
-         Length of the object, including header and payload, in octets.
-         If there is no payload, the value of Length is 4.  This is used
-         to convey that the object is unavailable (e.g., because the
+         Length of the Environmental Information object, including
+         object header and object payload, in octets.  If there is no
+         object payload, the value of Length is 4.  This is used to
+         convey that the object is unavailable (e.g., because the
          requested information is not applicable for the type of
-         component that is being queried).
+         component that is being queried.)
 
       Class-Num:
          TBA (Environmental Information)
@@ -332,10 +333,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-
-Pignataro, et al.         Expires 21 April 2025                 [Page 6]
+Pignataro, et al.          Expires 1 July 2025                  [Page 6]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
                             1                   2                   3
@@ -350,7 +350,7 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
        A Class-Num of TBA and a C-Type of 1 are specified.
 
-       The Length is 8 if the object contains this payload.  A Length
+       The Length is 12 if the object contains this payload.  A Length
        value of 4 indicates that it is unavailable.
 
        The Present Power is the node-level power being presently drawn,
@@ -389,9 +389,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                 [Page 7]
+Pignataro, et al.          Expires 1 July 2025                  [Page 7]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
                             1                   2                   3
@@ -445,9 +445,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                 [Page 8]
+Pignataro, et al.          Expires 1 July 2025                  [Page 8]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
        3.  Energy-efficient ethernet [EERC-EEE]
@@ -477,7 +477,7 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
        A Class-Num of TBA and a C-Type of 5 are specified.
 
-       The Length is 4 plus 20 times the number of elements included.  A
+       The Length is 4 plus 24 times the number of elements included.  A
        Length value of 4 indicates that this object is unavailable.
 
        The returned value is one or more instances of component-level
@@ -501,9 +501,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                 [Page 9]
+Pignataro, et al.          Expires 1 July 2025                  [Page 9]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
                             1                   2                   3
@@ -557,9 +557,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                [Page 10]
+Pignataro, et al.          Expires 1 July 2025                 [Page 10]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
        A Class-Num of TBA and a C-Type of 7 are specified.
@@ -613,9 +613,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                [Page 11]
+Pignataro, et al.          Expires 1 July 2025                 [Page 11]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
 7.  Sample Use Case
@@ -669,9 +669,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                [Page 12]
+Pignataro, et al.          Expires 1 July 2025                 [Page 12]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
    Many use cases are possible on the basis of the ICMP extensions
@@ -725,9 +725,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                [Page 13]
+Pignataro, et al.          Expires 1 July 2025                 [Page 13]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
    allow general ICMP messages, an administrator can configure those
@@ -781,9 +781,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                [Page 14]
+Pignataro, et al.          Expires 1 July 2025                 [Page 14]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
      +==============+===============================+===============+
@@ -837,9 +837,9 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 
 
-Pignataro, et al.         Expires 21 April 2025                [Page 15]
+Pignataro, et al.          Expires 1 July 2025                 [Page 15]
 
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
 
 
       +=============+==============================+===============+
@@ -865,12 +865,14 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
 
 10.  Acknowledgements
 
-   We are very grateful to Jari Arkko for his thorough review and most
-   useful set of comments and suggestions.  We are also appreciative of
-   the feedback, input, and interest from participants of the eimpact
+   We are very grateful to Jari Arkko for his support, thorough review,
+   and useful set of comments and suggestions.  We are also appreciative
+   of the feedback, input, and interest from participants of the eimpact
    2024 Interim meeting.
 
-   Shawn Emery provided very useful feedback and suggestions.
+   Thank you to Shawn Emery for providing very useful feedback and
+   suggestions, and to William Hawkins III for a thorough review and
+   sharing some fixes.
 
 11.  References
 
@@ -886,17 +888,19 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
               DOI 10.17487/RFC4884, April 2007,
               <https://www.rfc-editor.org/info/rfc4884>.
 
+
+
+
+
+
+Pignataro, et al.          Expires 1 July 2025                 [Page 16]
+
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
+
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-
-
-
-Pignataro, et al.         Expires 21 April 2025                [Page 16]
-
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
-
 
    [RFC8335]  Bonica, R., Thomas, R., Linkova, J., Lenart, C., and M.
               Boucadair, "PROBE: A Utility for Probing Interfaces",
@@ -939,20 +943,22 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2024
               <https://datatracker.ietf.org/doc/minutes-interim-2022-
               eimpactws-04-202212121400/>.
 
+
+
+
+
+
+
+Pignataro, et al.          Expires 1 July 2025                 [Page 17]
+
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
+
+
    [IANA-ICMP-Extended]
               "Internet Control Message Protocol (ICMP) Parameters, ICMP
               Extension Object Classes and Class Sub-types",
               <https://www.iana.org/assignments/icmp-parameters/icmp-
               parameters.xhtml#icmp-parameters-ext-classes>.
-
-
-
-
-
-Pignataro, et al.         Expires 21 April 2025                [Page 17]
-
-Internet-Draft         ICMP Enviro Info Extensions          October 2024
-
 
    [RFC0792]  Postel, J., "Internet Control Message Protocol", STD 5,
               RFC 792, DOI 10.17487/RFC0792, September 1981,
@@ -997,6 +1003,13 @@ Authors' Addresses
    Email: rbonica@juniper.net
 
 
+
+
+Pignataro, et al.          Expires 1 July 2025                 [Page 18]
+
+Internet-Draft         ICMP Enviro Info Extensions         December 2024
+
+
    Michael Welzl
    University of Oslo
    Norway
@@ -1005,4 +1018,47 @@ Authors' Addresses
 
 
 
-Pignataro, et al.         Expires 21 April 2025                [Page 18]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.          Expires 1 July 2025                 [Page 19]

@@ -18,7 +18,7 @@
 <?rfc rfcedstyle="yes"?>
 <?rfc subcompact="no" ?>
 <?rfc symrefs="yes"?>
-<rfc category="exp" docName="draft-pignataro-green-enviro-icmp-00" ipr="trust200902" submissionType="IETF">
+<rfc category="exp" docName="draft-pignataro-green-enviro-icmp-01" ipr="trust200902" submissionType="IETF">
   <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
   <?rfc toc="yes" ?>
   <?rfc compact="yes" ?>
@@ -309,11 +309,12 @@
             <t hangText="">
               <list style="hanging">
                 <t hangText="Length:">
-                  <br />Length of the object, including header and payload, 
-                  in octets. If there is no payload, the value of Length is 4.
+                  <br />Length of the Environmental Information object, 
+                  including object header and object payload, 
+                  in octets. If there is no object payload, the value of Length is 4.
                   This is used to convey that the object is unavailable (e.g.,
                   because the requested information is not applicable for the
-                  type of component that is being queried).
+                  type of component that is being queried.)
                 </t>
                 <t hangText="Class-Num:">
                   <br />TBA (Environmental Information)
@@ -376,7 +377,7 @@
             </figure>
             A Class-Num of TBA and a C-Type of 1 are specified.  
             <vspace blankLines="1" />
-            The Length is 8 if the object contains this payload.
+            The Length is 12 if the object contains this payload.
             A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
             The Present Power is the node-level power being presently drawn, 
@@ -499,7 +500,7 @@
             </figure>
             A Class-Num of TBA and a C-Type of 5 are specified.  
             <vspace blankLines="1" />
-            The Length is 4 plus 20 times the number of 
+            The Length is 4 plus 24 times the number of 
             elements included. A Length value of 4 indicates that
             this object is unavailable.
             <vspace blankLines="1" />
@@ -887,13 +888,14 @@ Trace complete.
 
     <section title="Acknowledgements">
       <t>
-        We are very grateful to Jari Arkko for his thorough review and most 
+        We are very grateful to Jari Arkko for his support, thorough review, and  
         useful set of comments and suggestions. We are also appreciative of the 
         feedback, input, and interest from participants of the eimpact 2024 Interim 
         meeting.
       </t>
       <t>
-        Shawn Emery provided very useful feedback and suggestions.
+        Thank you to Shawn Emery for providing very useful feedback and suggestions, and 
+        to William Hawkins III for a thorough review and sharing some fixes.
       </t>
     </section>
   </middle>
