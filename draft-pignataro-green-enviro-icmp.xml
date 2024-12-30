@@ -42,13 +42,15 @@
     </author>
 
     <author fullname="Jainam Parikh" initials="J." surname="Parikh">
-      <organization abbrev="NC State University">North Carolina State University</organization>
+     <organization abbrev="Arista Networks">Arista Networks</organization>
       <address>
         <postal>
+          <street>5453 Great America Parkway</street>
+          <city>Santa Clara</city>
+          <code>95035</code>
           <country>US</country>
-        </postal>        
+        </postal>
         <email>jainam@parikhgroup.net</email>
-        <email>jparikh@ncsu.edu</email>
       </address>
     </author>
 
@@ -80,7 +82,7 @@
         ICMP messages. The ICMP extension defined herein can be used to
         gain visibility on environmental sustainability information on the Internet by 
         providing per-hop (i.e., per topological network node) power metrics
-        and other current or future sustainability metrics. This will contribute 
+        and other present or future sustainability metrics. This will contribute 
         to achieving an objective mentioned in the IAB E-Impact workshop.
       </t>
       <t>
@@ -112,7 +114,10 @@
         have been foundational for control and management for decades now encounter 
         new requirements including enhancing them to cater to a significantly 
         increasing demand for monitoring the sustainability and environmental 
-        impact. This document serves that need by defining an ICMP extension 
+        impact.
+      </t>
+      <t>
+        This document serves that need by defining an ICMP extension 
         object that appends environmental sustainability information to 
         ICMP messages. Using ICMP as a medium to deliver environmental 
         sustainability information is very apt as ICMP is one of the most used
@@ -342,7 +347,7 @@
           The 8-bit C-Type defined in the Section 8 of <xref target="RFC4884" /> 
           allows to carry different information elements within this Class-Num 
           (TBA). The techniques herein defined can be used with any specific 
-          environmental sustainability metric in use, current or future.
+          environmental sustainability metric in use, present or future.
         </t>
 
         <figure anchor="ctype-fig" align="left"
@@ -406,9 +411,9 @@
             The Length is 8 if the object contains this payload.
             A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
-            The returned value is the node-level current throughput, 
+            The returned value is the node-level present throughput, 
             which is a magnitude that may be directly displayed, and 
-            is expressed in bits-per-second (BPS). This allows the 
+            is expressed in bits-per-second (bps). This allows the 
             recipient of the ICMP message to determine a relationship 
             between power and traffic load.
           </t>
@@ -435,7 +440,7 @@
             <vspace blankLines="1" />
             The returned value is the node-level present throughput, 
             which is a magnitude that may be directly displayed, and 
-            is expressed in bits-per-second (BPS). This allows the 
+            is expressed in bits-per-second (bps). This allows the 
             recipient of the ICMP message to determine a relationship 
             between power and traffic load.
             <vspace blankLines="1" />
@@ -479,7 +484,7 @@
           <t>
             Component-level Power Draw Sub-Object
             <figure anchor="ctype-5" 
-                    title="Component-level Power Draw Element">
+                    title="Component-level Power Draw Sub-Object">
               <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -519,7 +524,7 @@
           <t>
             Component-level Throughput Short Sub-Object
             <figure anchor="ctype-6" 
-                    title="Component-level Throughput Short Element">
+                    title="Component-level Throughput Short Sub-Object">
               <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -545,7 +550,7 @@
             The returned value is one or more instances of component-level 
             throughput. Each instance is a set comprised
             by a UUID uniquely identifying the component, and the actual
-            throughput of said component in bits-per-second (BPS).
+            throughput of said component in bits-per-second (bps).
             This allows the recipient of the ICMP message to determine a
             relationship between power and traffic load.
           </t>
@@ -581,7 +586,7 @@
             The returned value is one or more instances of component-level 
             throughput. Each instance is a set comprised by a UUID uniquely 
             identifying the component, and the actual throughput of said 
-            component in bits-per-second (BPS). This allows the recipient 
+            component in bits-per-second (bps). This allows the recipient 
             of the ICMP message to determine a relationship between power 
             and traffic load.
             <vspace blankLines="1" />
@@ -642,7 +647,7 @@
         nodes, organizations now have components/interfaces/line cards with 10/40/100Gbps 
         or even 400Gbps throughput and nodes with a combined throughput of greater than
         10Tbps. This cannot be represented in a field which is only 32-bit long. 
-        A 32-bit field can only represent a max throughput of 4Gbps (2 ^ 32 BPS).
+        A 32-bit field can only represent a max throughput of 4Gbps (2 ^ 32 bps).
         To address this, we define another format, a wider, 64-bit Sub-Object
         format.
       </t>
@@ -764,7 +769,7 @@ Trace complete.
       <t>
         Keeping these considerations in mind, we limited the scope of the 
         transportation of the sustainability metrics to a single administrative 
-        domain (AD). But, based on <xref target="RFC8799" />, limiting a protocols 
+        domain (AD). But, based on <xref target="RFC8799" />, limiting a protocol's 
         functionality doesn't mean that it will be secure. So, this particular 
         document, which defines "a modified ICMP message with sustainability 
         metrics", can be classified as a FAIL-OPEN protocol 
