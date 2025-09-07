@@ -18,7 +18,7 @@
 <?rfc rfcedstyle="yes"?>
 <?rfc subcompact="no" ?>
 <?rfc symrefs="yes"?>
-<rfc category="exp" docName="draft-pignataro-green-enviro-icmp-01" ipr="trust200902" submissionType="IETF">
+<rfc category="exp" docName="draft-pignataro-icmp-enviro-info-00" ipr="trust200902" submissionType="IETF">
   <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
   <?rfc toc="yes" ?>
   <?rfc compact="yes" ?>
@@ -729,6 +729,23 @@ Trace complete.
       </t>
     </section>
 
+
+    <section title="Implementation Status">
+      <t>
+        There is interest in the 'green networking community' to have a lightweight mechanism to provide environmental sustainability information. We are aware of a couple of implementations.
+
+
+        <list style="numbers">
+          <t>William Hawkins III, from the University of Cincinnati, has led an implementation called "greenmatter", found at <eref target="https://github.com/cerfcast/greenmatter" />, that responds to ICMP Extended Echo Messages with Environmental Information.
+          </t>
+          <t>A second implementation, which is a work-in-progress, is a Python-based sender and a receiver, led by Jainam Parikh.</t>
+        </list>
+
+
+      </t>
+    </section>
+
+
     <section title="Security Considerations">
       <t>
         The security considerations of <xref target="RFC4884" /> and of 
@@ -900,7 +917,7 @@ Trace complete.
       </t>
       <t>
         Thank you to Shawn Emery for providing very useful feedback and suggestions, and 
-        to William Hawkins III for a thorough review and sharing some fixes.
+        to William Hawkins III for a thorough review and sharing some fixes, as well as for the first implementation of this Internet-Draft, adding environmental information to ICMP messages.
       </t>
     </section>
   </middle>
