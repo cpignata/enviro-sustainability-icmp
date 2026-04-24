@@ -717,11 +717,11 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
        https://github.com/cerfcast/greenmatter, that responds to ICMP
        Extended Echo Messages with Environmental Information.
 
-   2.  A second implementation, which is a work-in-progress, is a
-       Python-based sender and a receiver, led by Jainam Parikh.
-
-
-
+   2.  A second implementation, which is a Python-based sender and a
+       receiver, led by Jainam Parikh, found at
+       https://github.com/jmparikh/green-extension-poc, that responds to
+       ICMP Extended Echo Messages with Environmental Information, with
+       an Extended Echo Reply.
 
 
 
