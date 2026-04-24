@@ -12,6 +12,7 @@
 <!ENTITY RFC.8335 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8335.xml">
 <!ENTITY RFC.8799 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8799.xml">
 <!ENTITY RFC.4122 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4122.xml">
+<!ENTITY RFC.9547 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9547.xml">
 <!ENTITY I-D.wkumari-intarea-safe-limited-domains SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-wkumari-intarea-safe-limited-domains-00.xml">
 ]>
 <?rfc toc="yes"?>
@@ -84,7 +85,7 @@
         providing per-hop (i.e., per topological network node) power metrics
         and other present or future metrics around environmental information.
         This will contribute to achieving an objective mentioned in the IAB E-Impact 
-        workshop (RFC 9547).
+        workshop <xref target="RFC9547" />.
       </t>
       <t>
         The techniques presented are useful not only in a transactional setting 
@@ -714,6 +715,16 @@ Trace complete.
           <t>A second implementation, which is a Python-based sender and a receiver, led by Jainam Parikh, found at 
             <eref target="https://github.com/jmparikh/green-extension-poc" />, that responds to ICMP Extended Echo 
             Messages with Environmental Information, with an Extended Echo Reply.
+            <ul>
+              <li>
+                Receiver (receiver.py) — waits for incoming data. Requires two arguments: (0 or 1) <br />
+                --probeFlag: Tells the receiver to include the Interface Identification Object <xref target="RFC8335" /> in the response or not <br />
+                --greenFlag: Tells the receiver to include the Environmental Information Object (this document) in the response or not
+              </li>
+              <li>
+                Sender (sender.py) — connects to the receiver and sends data. Simply sends an ICMP Extended Echo Request to the receiver.py
+              </li>
+            </ul>
           </t>
         </list>
       </t>
@@ -918,6 +929,7 @@ Trace complete.
       &RFC.0792;
       &RFC.4443;
       &RFC.8799;
+      &RFC.9547;
       &I-D.wkumari-intarea-safe-limited-domains;
 
       <reference anchor="IAB-EIMPACTWS" target="https://datatracker.ietf.org/group/eimpactws/">
