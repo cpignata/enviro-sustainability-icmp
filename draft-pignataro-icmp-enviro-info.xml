@@ -209,8 +209,8 @@
           <t hangText="">
             Classic diagnostic tools such as ping and traceroute remain the most widely used
             and universally available command-line utilities for network troubleshooting,
-            commonly serving as the first step in connectivity and reachability diagnosis, and
-            so, building extensions on top of these tools, could prove to be relatively easy to
+            commonly serving as the first step in connectivity and reachability diagnosis. Thus,
+            building extensions on top of these tools, could prove to be relatively easy to
             adapt and implement.
           </t>
           <t hangText="(3) Standardization at the Lowest Common Mechanism"></t>
@@ -232,7 +232,7 @@
           lightweight environmental telemetry without new protocols, APIs, or credentials.
         </t>
         <t>
-          Facilitates path-level mapping of sustainability metrics, comparable to 
+          This facilitates path-level mapping of sustainability metrics, comparable to 
           latency or loss, across heterogeneous equipment and administrative domains.
         </t>
         <t>
@@ -577,7 +577,7 @@
             and traffic load.
             <vspace blankLines="1" />
             There's an in-depth discussion on why we have chosen a 
-            64-bit object type, in Section <xref target="subobject-formats" />.
+            64-bit object type, in <xref target="subobject-formats" />.
           </t>
         </list>
 
@@ -622,23 +622,23 @@
     <section anchor="subobject-formats" title="Sub-Object Formats">
       <t>
         As discussed in <xref target="ctype" />, we have chosen 64-bit
-        sub-objects where we need to accommodate the present trends of the industry 
+        sub-objects to accommodate the present trends of the industry 
         with respect to high density ports/components and nodes. Organizations
         now have components/interfaces/line cards with 100/400/800Gbps
-        throughput and nodes with a combined throughput of greater than
+        throughput and nodes with a combined throughput exceeding
         10Tbps. This cannot be represented in a field which is only 32-bit long. 
         A 32-bit field can only represent a max throughput of 4Gbps (2 ^ 32 bps).
-        To address this, we had to define a "wider" sub-object format, 64-bit Sub-Object
+        To address this, we define a "wider" 64-bit Sub-Object
         format.
       </t>
       
       <t>
-        While we could have defined both, the "wide" (64-bit) and "short" (32-bit)
-        variants and leave it up to the device (node) to choose one over the other,
-        based on the size requirements of the data, which could make the final packet
-        space efficient, but would make it difficult to implement, as node will have to
+        We could have defined both the "wide" (64-bit) and "short" (32-bit)
+        variants and leave it up to the device (node) to choose one over the other
+        based on the size requirements of the data; this could make the final packet
+        space efficient, but it would be harder to implement, as a node would have to
         make an extra check to decide what kind to choose from (wide or short).
-        And hence, for the ease of implementation, we have decided to just define a 64-bit
+        Hence, for the ease of implementation, we have decided to just define a 64-bit
         sub-object where we need one, and skip defining a 32-bit sub-object for information
         like throughput, etc.
       </t>
