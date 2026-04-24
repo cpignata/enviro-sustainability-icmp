@@ -201,7 +201,7 @@
           <t hangText="">
             Networking chips and devices increasingly measure and expose environmental
             information such as power draw, energy use, thermal data, and other pieces of 
-            metrics/information. Telemetry data has proven to be super important in making
+            metrics/information. Telemetry data has proven to be very important in making
             large scale network deployments efficient from the perspective of power consumption, 
             cooling etc.
           </t>
