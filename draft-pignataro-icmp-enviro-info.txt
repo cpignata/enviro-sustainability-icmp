@@ -5,12 +5,12 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Experimental                                  J. Parikh
-Expires: 11 March 2026                                   Arista Networks
+Expires: 25 October 2026                                 Arista Networks
                                                                R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                        7 September 2025
+                                                           23 April 2026
 
 
              ICMP Extensions for Environmental Information
@@ -20,17 +20,17 @@ Abstract
 
    This document defines a data structure that can be appended to
    selected ICMP messages.  The ICMP extension defined herein can be
-   used to gain visibility on environmental sustainability information
-   on the Internet by providing per-hop (i.e., per topological network
-   node) power metrics and other present or future sustainability
-   metrics.  This will contribute to achieving an objective mentioned in
-   the IAB E-Impact workshop.
+   used to gain visibility on environmental information on the internet
+   by providing per-hop (i.e., per topological network node) power
+   metrics and other present or future metrics around environmental
+   information.  This will contribute to achieving an objective
+   mentioned in the IAB E-Impact workshop.
 
    The techniques presented are useful not only in a transactional
    setting (e.g., a user-issued traceroute or a ping request), but also
    in a scheduled automated setting where they may be run periodically
    in a mesh across an administrative domain to map out environmental
-   sustainability metrics.
+   information.
 
 Status of This Memo
 
@@ -47,20 +47,20 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 March 2026.
+   This Internet-Draft will expire on 25 October 2026.
 
 
 
 
 
-Pignataro, et al.         Expires 11 March 2026                 [Page 1]
+Pignataro, et al.        Expires 25 October 2026                [Page 1]
 
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -79,20 +79,21 @@ Table of Contents
      2.1.  Definition of Terms . . . . . . . . . . . . . . . . . . .   3
      2.2.  Requirements Language . . . . . . . . . . . . . . . . . .   4
    3.  Motivation  . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Transport Options for Sustainability Information  . . . . . .   4
-   5.  ICMP Environmental Information Extension  . . . . . . . . . .   5
-     5.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   5
-     5.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   6
+     3.1.  Why is ICMP suitable? . . . . . . . . . . . . . . . . . .   5
+   4.  Transport Options for Environmental Information . . . . . . .   5
+   5.  ICMP Environmental Information Extension  . . . . . . . . . .   6
+     5.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   6
+     5.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   7
    6.  Sub-Object Formats  . . . . . . . . . . . . . . . . . . . . .  11
    7.  Sample Use Case . . . . . . . . . . . . . . . . . . . . . . .  12
    8.  Implementation Status . . . . . . . . . . . . . . . . . . . .  13
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  14
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  16
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  16
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
+   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  17
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  17
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  17
      12.2.  Informative References . . . . . . . . . . . . . . . . .  17
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
 
@@ -103,23 +104,27 @@ Table of Contents
    source.  Network operators and higher-level protocols use these ICMP
    messages to detect and diagnose network issues.
 
-   As the world transitions towards sustainability in technology, the
-   focus is shifting not only on creating modern technologies infused
-   with environmental sustainability but also on bridging gaps in the
 
 
 
-Pignataro, et al.         Expires 11 March 2026                 [Page 2]
+
+
+Pignataro, et al.        Expires 25 October 2026                [Page 2]
 
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
-   tools that are already available, to enhance visibility, measurement,
-   and quantification of their environmental impact.  Consequently,
-   tools which have been foundational for control and management for
-   decades now encounter new requirements including enhancing them to
-   cater to a significantly increasing demand for monitoring the
-   sustainability and environmental impact.
+   As the world transitions towards environmental sustainability in
+   technology, and to use metrics to make networks more efficient, both
+   from the environmental and technological standpoint, the focus is
+   shifting not only on creating modern technologies infused with
+   environmental information but also on bridging gaps in the tools that
+   are already available, to enhance visibility, measurement, and
+   quantification of their environmental impact.  Consequently, tools
+   which have been foundational for control and management for decades
+   now encounter new requirements including enhancing them to cater to a
+   significantly increasing demand for monitoring the sustainability and
+   environmental impact.
 
    This document serves that need by defining an ICMP extension object
    that appends environmental sustainability information to ICMP
@@ -130,14 +135,14 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
    demand setting for different purposes and use cases.
 
    Using the extension defined herein, a device can explicitly append
-   these environmental sustainability metrics for transmission across an
-   administrative domain:
+   these environmental sustainability information for transmission
+   across an administrative domain:
 
    *  Present and idle power (node level, component level)
    *  Throughput (node level, component level)
    *  Ecolabels and Environmentally Relevant Certifications (EERCs)
 
-   Additional environmental sustainability metrics, such as the
+   Additional environmental sustainability information, such as the
    following, for example, may also be specified in the future:
 
    *  Electrical Energy Provider or Zone
@@ -160,14 +165,9 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
 
 
-
-
-
-
-
-Pignataro, et al.         Expires 11 March 2026                 [Page 3]
+Pignataro, et al.        Expires 25 October 2026                [Page 3]
 
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 2.2.  Requirements Language
@@ -180,22 +180,75 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
 3.  Motivation
 
-   The IAB held a workshop on "Environmental Impact of Internet
-   Applications and Systems (eimpactws)" [IAB-EIMPACTWS], in which the
-   need for visibility into environmental sustainability metrics within
-   traditional Internet tools such as traceroute was highlighted (see
-   WebVTT cue identifiers 139 and 140 of [IAB-EIMPACTWS-Minutes].)
+   Motivations behind this proposing the extension defined here in this
+   document are:
 
-   The Environmental Information ICMP Extensions defined in this
-   document allow for augmenting the traceroute output with
-   environmental metrics from each reported node.
+   (1) IAB's Environmental Impact of Internet Applications and
+   Systems (eimpactws)
 
-4.  Transport Options for Sustainability Information
+      The IAB held a workshop on "Environmental Impact of Internet
+      Applications and Systems (eimpactws)" [IAB-EIMPACTWS], in which
+      the need for visibility into environmental sustainability
+      information within traditional Internet tools such as traceroute
+      was highlighted (see WebVTT cue identifiers 139 and 140 of
+      [IAB-EIMPACTWS-Minutes].)
 
-   To achieve the goal of transporting useful sustainability information
+   (2) Native Telemetry Data Availability
+
+      Networking chips and devices increasingly measure and expose
+      environmental information such as power draw, energy use, thermal
+      data, and other pieces of metrics/information.  Telemetry data has
+      proven to be super important in making large scale network
+      deployments efficient from the perspective of power consumption,
+      cooling etc.
+
+   (3) Ubiquitous Operational Use
+
+      Classic diagnostic tools such as ping and traceroute remain the
+      most widely used and universally available command-line utilities
+      for network troubleshooting, commonly serving as the first step in
+      connectivity and reachability diagnosis, and so, building
+      extensions on top of these tools, could prove to be relatively
+      easy to adapt and implement.
+
+   (3) Standardization at the Lowest Common Mechanism
+
+      We are making use of an already mature, extensible, and widely
+      implemented foundation: RFC 4884 (Extended ICMP for Multi-Part
+      Messages) [RFC4884]
+
+
+
+
+
+Pignataro, et al.        Expires 25 October 2026                [Page 4]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
+
+3.1.  Why is ICMP suitable?
+
+   Environmental data already exists in inventories, the novelty is
+   surfacing it along the path of live connectivity probes (e.g., ping,
+   traceroute, PROBE [RFC8335]) for real-time, per-hop context.
+
+   ICMP is universally implemented, stateless, and tool-agnostic
+   enabling lightweight environmental telemetry without new protocols,
+   APIs, or credentials.
+
+   Facilitates path-level mapping of sustainability metrics, comparable
+   to latency or loss, across heterogeneous equipment and administrative
+   domains.
+
+   Not mutually exclusive (cross compatible) with any other
+   environmental information retrieval methods.
+
+4.  Transport Options for Environmental Information
+
+   To achieve the goal of transporting useful environmental information
    across the network, there are two key considerations.  First, what
    information is useful to convey and in what format, and second, how
-   to transport that sustainability information.
+   to transport that environmental information.
 
    For the first task, it is critical to normalize and agree upon the
    information to convey and format, across potentially multiple
@@ -204,16 +257,16 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
    For the second task, there is a variety of options available
    depending on use cases.  These can be categorized based on whether
    the approach is distributed (i.e., any endpoint or node can request
-   and/or receive the sustainability information) or centralized (i.e.,
-   a single 'controller' compiles and consolidates the information.)
-   They can also be categorized based on the networking layer used
-   (e.g., IP, like ICMP, or application, like SNMP).  Further, an
-   existing protocol can be extended, or a brand new protocol can
-   potentially be created for this purpose.
+   and/or receive the environmental information) or centralized (i.e., a
+   single 'controller' compiles and consolidates the information.)  They
+   can also be categorized based on the networking layer used (e.g., IP,
+   like ICMP, or applications, like SNMP).  Further, an existing
+   protocol can be extended, or a brand new protocol can potentially be
+   created for this purpose.
 
    This document builds upon a standardized, modular, backwards-
    compatible, and scale-proven ICMP extension [RFC4884].  This does not
-   preclude the definition of other methods to transport sustainability
+   preclude the definition of other methods to transport environmental
    information, more fitting to other use-cases.
 
 
@@ -221,9 +274,12 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
 
 
-Pignataro, et al.         Expires 11 March 2026                 [Page 4]
+
+
+
+Pignataro, et al.        Expires 25 October 2026                [Page 5]
 
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 5.  ICMP Environmental Information Extension
@@ -277,9 +333,9 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
 
 
-Pignataro, et al.         Expires 11 March 2026                 [Page 5]
+Pignataro, et al.        Expires 25 October 2026                [Page 6]
 
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
    (1) ICMP Extension Header
@@ -333,9 +389,9 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
 
 
-Pignataro, et al.         Expires 11 March 2026                 [Page 6]
+Pignataro, et al.        Expires 25 October 2026                [Page 7]
 
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
         Figure 2: Environmental Information Extension Object Header
@@ -366,35 +422,7 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        when the node is idle.  A value of 0 indicates that the Idle
        Power is not available.
 
-   2.  Node Throughput Short Sub-Object
-
-                            1                   2                   3
-        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |              Throughput (32-bit unsigned word)                |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-                   Figure 4: Node Throughput Short Sub-Object
-
-       A Class-Num of TBA and a C-Type of 2 are specified.
-
-       The Length is 8 if the object contains this payload.  A Length
-       value of 4 indicates that it is unavailable.
-
-       The returned value is the node-level present throughput, which is
-       a magnitude that may be directly displayed, and is expressed in
-       bits-per-second (bps).  This allows the recipient of the ICMP
-       message to determine a relationship between power and traffic
-       load.
-
-
-
-Pignataro, et al.         Expires 11 March 2026                 [Page 7]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
-
-   3.  Node Throughput Wide Sub-Object
+   2.  Node Throughput Sub-Object
 
                             1                   2                   3
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -404,12 +432,23 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        |             Throughput (32-bit unsigned word 2)               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-                   Figure 5: Node Throughput Wide Sub-Object
+                      Figure 4: Node Throughput Sub-Object
 
-       A Class-Num of TBA and a C-Type of 3 are specified.
+       A Class-Num of TBA and a C-Type of 2 are specified.
 
        The Length is 12 if the object contains this payload.  A Length
        value of 4 indicates that it is unavailable.
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 25 October 2026                [Page 8]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
 
        The returned value is the node-level present throughput, which is
        a magnitude that may be directly displayed, and is expressed in
@@ -417,11 +456,10 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        message to determine a relationship between power and traffic
        load.
 
-       There's an in-depth discussion on why there are two formats, a
-       32-bit "short" and a 64-bit "wide", and when will one be chosen
-       over the other, in Section Section 6.
+       There's an in-depth discussion on why we have chosen a 64-bit
+       object type, in Section Section 6.
 
-   4.  Ecolabels and Environmentally Relevant Certification (EERC) Sub-
+   3.  Ecolabels and Environmentally Relevant Certification (EERC) Sub-
        Object
 
                             1                   2                   3
@@ -430,9 +468,9 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        |         EERC number           |0 0 0 0|          Year         |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-                           Figure 6: EERC Sub-Object
+                           Figure 5: EERC Sub-Object
 
-       A Class-Num of TBA and a C-Type of 4 are specified.
+       A Class-Num of TBA and a C-Type of 3 are specified.
 
        The Length is 8 if the object contains this payload.  A Length
        value of 4 indicates that it is unavailable.
@@ -443,13 +481,6 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
        1.  ISO 14001:2015 [EERC-ISO14001_2015]
 
-
-
-Pignataro, et al.         Expires 11 March 2026                 [Page 8]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
-
        2.  TCO Certified [EERC-TCO]
 
        3.  Energy-efficient ethernet [EERC-EEE]
@@ -457,7 +488,23 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        The "Year" field must contain the year in which the certificate
        was issued, or 0 to indicate "unknown" or "not specified".
 
-   5.  Component-level Power Draw Sub-Object
+   4.  Component-level Power Draw Sub-Object
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 25 October 2026                [Page 9]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
 
                             1                   2                   3
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -475,9 +522,9 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        |        Idle Component Power (32-bit unsigned word)            |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-                Figure 7: Component-level Power Draw Sub-Object
+                Figure 6: Component-level Power Draw Sub-Object
 
-       A Class-Num of TBA and a C-Type of 5 are specified.
+       A Class-Num of TBA and a C-Type of 4 are specified.
 
        The Length is 4 plus 24 times the number of elements included.  A
        Length value of 4 indicates that this object is unavailable.
@@ -494,47 +541,26 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        value of 0 indicates that the Idle Component Power is not
        available.
 
-   6.  Component-level Throughput Short Sub-Object
+   5.  Component-level Throughput Sub-Object
 
 
 
 
 
 
-Pignataro, et al.         Expires 11 March 2026                 [Page 9]
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 25 October 2026               [Page 10]
 
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
-
-                            1                   2                   3
-        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                      UUID 32-bit Word 1                       |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                      UUID 32-bit Word 2                       |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                      UUID 32-bit Word 3                       |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                      UUID 32-bit Word 4                       |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |              Component Throughput (32-bit word)               |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-             Figure 8: Component-level Throughput Short Sub-Object
-
-       A Class-Num of TBA and a C-Type of 6 are specified.
-
-       The Length is 4 plus 20 times the number of elements included.  A
-       Length value of 4 indicates that this object is unavailable.
-
-       The returned value is one or more instances of component-level
-       throughput.  Each instance is a set comprised by a UUID uniquely
-       identifying the component, and the actual throughput of said
-       component in bits-per-second (bps).  This allows the recipient of
-       the ICMP message to determine a relationship between power and
-       traffic load.
-
-   7.  Component-level Throughput Wide Sub-Object
 
                             1                   2                   3
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -552,17 +578,9 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        |             Component Throughput (32-bit word 2)              |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-              Figure 9: Component-level Throughput Wide Sub-Object
+                Figure 7: Component-level Throughput Sub-Object
 
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 10]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
-
-       A Class-Num of TBA and a C-Type of 7 are specified.
+       A Class-Num of TBA and a C-Type of 5 are specified.
 
        The Length is 4 plus 24 times the number of elements included.  A
        Length value of 4 indicates that this object is unavailable.
@@ -574,69 +592,87 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
        the ICMP message to determine a relationship between power and
        traffic load.
 
-       A discussion on why there are two formats, a 32-bit "short" and a
-       64-bit "wide", and when will one be chosen over the other, can be
-       found in Section 6.
+       There's an in-depth discussion on why we have chosen a 64-bit
+       object type, in Section Section 6.
 
 6.  Sub-Object Formats
 
-   As discussed in Section 5.2, apart from the 32-bit "short" sub-
-   object, we have also defined a 64-bit "wide" format for Node and
-   Component throughput Sub-Objects.
-
-   The 64-bit format was defined keeping the present trends of the
-   industry in mind.  With the industry shifting towards high density
-   ports/components and nodes, organizations now have
-   components/interfaces/line cards with 10/40/100Gbps or even 400Gbps
+   As discussed in Section 5.2, we have chosen 64-bit sub-objects where
+   we need to accommodate the present trends of the industry with
+   respect to high density ports/components and nodes.  Organizations
+   now have components/interfaces/line cards with 100/400/800Gbps
    throughput and nodes with a combined throughput of greater than
    10Tbps.  This cannot be represented in a field which is only 32-bit
    long.  A 32-bit field can only represent a max throughput of 4Gbps (2
-   ^ 32 bps).  To address this, we define another format, a wider,
-   64-bit Sub-Object format.
+   ^ 32 bps).  To address this, we had to define a "wider" sub-object
+   format, 64-bit Sub-Object format.
 
-   It is recommended that the device chooses a format based on the size
-   of the value that it wants to append.  For example, If the component/
-   node throughput is more less than 4Gbps, the device would append the
-   "short" 32-bit Sub-Object.  When the component/node throughput
-   exceeds 4Gbps, the device would append the "wide" 64-bit Sub-Object.
-   This will ensure the optimal use of the formats and make the
-   extension object space efficient.
-
-   Both of these formats are interoperable and can co-exist in the same
-   Extension Object. i.e. For example, if a device has two line cards,
-   one with a throughput of 2Gbps and another which has a throughput of
-   10Gbps, and if the device would like to append the throughput of both
-   the components, as discussed above, the device will be able to choose
-   a Sub-object with C-Type=6 for the line card with 2Gbps throughput
-   and will also be able to choose a Sub-Object with C-Type=7 for the
-   line card with 10Gbps throughput.
+   While we could have defined both, the "wide" (64-bit) and "short"
+   (32-bit) variants and leave it up to the device (node) to choose one
+   over the other, based on the size requirements of the data, which
 
 
 
-Pignataro, et al.         Expires 11 March 2026                [Page 11]
+Pignataro, et al.        Expires 25 October 2026               [Page 11]
 
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
+
+   could make the final packet space efficient, but would make it
+   difficult to implement, as node will have to make an extra check to
+   decide what kind to choose from (wide or short).  And hence, for the
+   ease of implementation, we have decided to just define a 64-bit sub-
+   object where we need one, and skip defining a 32-bit sub-object for
+   information like throughput, etc.
 
 7.  Sample Use Case
 
    The ICMP extension defined in this memo can be used to get
-   sustainability metrics, either via a "transactional" or a "scheduled
-   automated" fashion, inside an administrative domain.  This section
-   presents a sample "transactional" use case of how these metrics could
-   be displayed to a user.  Since both traceroute and ping utilities are
-   based on ICMP, we will use traceroute as an example.
+   environmental information, either via a "transactional" or a
+   "scheduled automated" fashion, inside an administrative domain.  This
+   section presents a sample "transactional" use case of how these
+   pieces of information could be displayed to a user.  Since both
+   traceroute and ping utilities are based on ICMP, we will use
+   traceroute as an example.
 
    The flavor of traceroute that has been shown here supports the ICMP
    extensions and is capable of conveying to the end user the
-   sustainability metrics in the extensions, along with the nodes that
-   the original datagram visited on its way to the destination.  This
-   traceroute is also backwards-compatible, i.e., it can also work well
-   with those nodes which do not support these ICMP extensions.
+   environmental information in the extensions, along with the nodes
+   that the original datagram visited on its way to the destination.
+   This traceroute is also backwards-compatible, i.e., it can also work
+   well with those nodes which do not support these ICMP extensions.
 
    A user at a host with an IP address 198.51.100.27 executes a
-   traceroute to 192.0.2.1 and the Figure 10 shows how the user can be
-   presented with these metrics:
+   traceroute to 192.0.2.1 and the Figure 8 shows how the user can be
+   presented with these different pieces of information:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 25 October 2026               [Page 12]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
 
    > traceroute 192.0.2.1
    Tracing route to 192.0.2.1 over a maximum of 30 hops
@@ -663,16 +699,7 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
    Trace complete.
 
-            Figure 10: Sustainability-Metrics Infused Traceroute
-
-
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 12]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
+           Figure 8: Environmental-Information Infused Traceroute
 
    Many use cases are possible on the basis of the ICMP extensions
    defined in this memo; it is up to the user to decide how frequently
@@ -693,6 +720,16 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
    2.  A second implementation, which is a work-in-progress, is a
        Python-based sender and a receiver, led by Jainam Parikh.
 
+
+
+
+
+
+Pignataro, et al.        Expires 25 October 2026               [Page 13]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
+
 9.  Security Considerations
 
    The security considerations of [RFC4884] and of [RFC8335] apply to
@@ -711,7 +748,7 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
    The extensions defined in this document allows a router to append
    environmental sustainability information to multi-part ICMP messages,
    and therefore can provide the user of the traceroute and ping
-   applications with additional metrics.
+   applications with additional information.
 
    The intended field of use for the extensions defined in this document
    is administrative debugging and troubleshooting and operational
@@ -719,38 +756,39 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
    information in ICMP responses.  These mechanisms are not initially
    intended for other uses.
 
-   Some of the additional metrics provided, as e.g., power draw
+   Some of the additional information provided, as e.g., power draw
    information, have privacy considerations.  For example, behavioral
    considerations of the devices, or estimating other node and network
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 13]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
-
    attributes from the power or energy data.  Other things like
    identification of the node, deducing node usage patterns are some
-   more privacy concerns that can be related to the metrics.
+   more privacy concerns that can be related to the information.
 
    Keeping these considerations in mind, we limited the scope of the
-   transportation of the sustainability metrics to a single
+   transportation of the environmental information to a single
    administrative domain (AD).  But, based on [RFC8799], limiting a
    protocol's functionality doesn't mean that it will be secure.  So,
    this particular document, which defines "a modified ICMP message with
-   sustainability metrics", can be classified as a FAIL-OPEN protocol
+   environmental information", can be classified as a FAIL-OPEN protocol
    [I-D.wkumari-intarea-safe-limited-domains].  That is, the interfaces
    of administrative domain border nodes, facing towards the open
    internet, can be configured such that they avoid leaking messages
-   with extensions containing sustainability metrics, out of the AD.  To
-   allow general ICMP messages, an administrator can configure those
+   with extensions containing environmental information, out of the AD.
+   To allow general ICMP messages, an administrator can configure those
    outward facing interfaces to not block/drop the entire message but
    only strip off the extension objects and only forward the ICMP
    message if it is destined to go out of the AD.
 
-   When metrics are limited to the same AD, it can be considered that
-   they can be generated from a valid source and will have integrity.
+
+
+
+Pignataro, et al.        Expires 25 October 2026               [Page 14]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
+
+   When environmental information are limited to the same AD, it can be
+   considered that they can be generated from a valid source and will
+   have integrity.
 
    High-fidelity reporting of power draw for the targeted node's memory,
    cache, hardware security module, or other sensitive component could
@@ -775,17 +813,6 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
    ICMP Extension Object Classes and Class Sub-types registry
    [IANA-ICMP-Extended]:
 
-
-
-
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 14]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
-
     +=============+==================================+===============+
     | Class Value | Class name                       | Reference     |
     +=============+==================================+===============+
@@ -797,6 +824,24 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
    IANA is requested to establish a registry for the corresponding class
    sub-type (C-Type) space, as follows:
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 25 October 2026               [Page 15]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
+
      +==============+===============================+===============+
      | C-Type Value | Description                   | Reference     |
      +==============+===============================+===============+
@@ -804,22 +849,16 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
      +--------------+-------------------------------+---------------+
      | 1            | Node Power Draw               | This document |
      +--------------+-------------------------------+---------------+
-     | 2            | Node Throughput Short         | This document |
+     | 2            | Node Throughput               | This document |
      +--------------+-------------------------------+---------------+
-     | 3            | Node Throughput Wide          | This document |
-     +--------------+-------------------------------+---------------+
-     | 4            | Ecolabels and Environmentally | This document |
+     | 3            | Ecolabels and Environmentally | This document |
      |              | Relevant Certification (EERC) |               |
      +--------------+-------------------------------+---------------+
-     | 5            | Component-level Power Draw    | This document |
+     | 4            | Component-level Power Draw    | This document |
      +--------------+-------------------------------+---------------+
-     | 6            | Component-level Throughput    | This document |
-     |              | Short                         |               |
+     | 5            | Component-level Throughput    | This document |
      +--------------+-------------------------------+---------------+
-     | 7            | Component-level Throughput    | This document |
-     |              | Wide                          |               |
-     +--------------+-------------------------------+---------------+
-     | 8-246        | Unassigned                    |               |
+     | 6-246        | Unassigned                    |               |
      +--------------+-------------------------------+---------------+
      | 247-255      | Reserved for Experimentation  | This document |
      +--------------+-------------------------------+---------------+
@@ -832,15 +871,6 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
    IANA is requested to establish a registry for Ecolabels and
    Environmentally Relevant Certification (EERC) numbers (C-Type 2), as
    follows:
-
-
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 15]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
 
       +=============+==============================+===============+
       | Number      | Name                         | Reference     |
@@ -860,15 +890,23 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
                           Table 3: EERC numbers
 
+
+
+
+Pignataro, et al.        Expires 25 October 2026               [Page 16]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
+
    EERC numbers are assignable on a first-come-first-serve (FCFS) basis,
    and require a citation to the definition of the certification.
 
 11.  Acknowledgements
 
    We are very grateful to Jari Arkko for his support, thorough review,
-   and useful set of comments and suggestions.  We are also appreciative
-   of the feedback, input, and interest from participants of the eimpact
-   2024 Interim meeting.
+   and a useful set of comments and suggestions.  We are also
+   appreciative of the feedback, input, and interest from participants
+   of the eimpact 2024 Interim meeting.
 
    Thank you to Shawn Emery for providing very useful feedback and
    suggestions, and to William Hawkins III for a thorough review and
@@ -889,15 +927,6 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
               DOI 10.17487/RFC4884, April 2007,
               <https://www.rfc-editor.org/info/rfc4884>.
 
-
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 16]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -917,6 +946,13 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
               Ethernet", IEEE Std 802.3az-2010 (Amendment to IEEE Std
               802.3-2008), 27 October 2010,
               <https://standards.ieee.org/ieee/802.3az/4270/>.
+
+
+
+Pignataro, et al.        Expires 25 October 2026               [Page 17]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
 
    [EERC-ISO14001_2015]
               "ISO 14001:2015 Environmental management systems.
@@ -943,17 +979,6 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
               <https://datatracker.ietf.org/doc/minutes-interim-2022-
               eimpactws-04-202212121400/>.
 
-
-
-
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 17]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
-
    [IANA-ICMP-Extended]
               "Internet Control Message Protocol (ICMP) Parameters, ICMP
               Extension Object Classes and Class Sub-types",
@@ -974,6 +999,16 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
               Protocol Version 6 (IPv6) Specification", STD 89,
               RFC 4443, DOI 10.17487/RFC4443, March 2006,
               <https://www.rfc-editor.org/info/rfc4443>.
+
+
+
+
+
+
+Pignataro, et al.        Expires 25 October 2026               [Page 18]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
 
    [RFC5927]  Gont, F., "ICMP Attacks against TCP", RFC 5927,
               DOI 10.17487/RFC5927, July 2010,
@@ -1002,14 +1037,6 @@ Authors' Addresses
    Ron Bonica
    Juniper Networks
    United States of America
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 18]
-
-Internet-Draft         ICMP Enviro Info Extensions        September 2025
-
-
    Email: rbonica@juniper.net
 
 
@@ -1034,31 +1061,4 @@ Internet-Draft         ICMP Enviro Info Extensions        September 2025
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pignataro, et al.         Expires 11 March 2026                [Page 19]
+Pignataro, et al.        Expires 25 October 2026               [Page 19]
