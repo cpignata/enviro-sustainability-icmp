@@ -465,7 +465,7 @@
             between power and traffic load.
             <vspace blankLines="1" />
             There's an in-depth discussion on why we have chosen a 
-            64-bit object type, in <xref target="subobject-formats" />.
+            64-bit object type in <xref target="subobject-formats" />.
           </t>
 
           <t>

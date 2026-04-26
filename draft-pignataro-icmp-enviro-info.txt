@@ -457,7 +457,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
        load.
 
        There's an in-depth discussion on why we have chosen a 64-bit
-       object type, in Section 6.
+       object type in Section 6.
 
    3.  Ecolabels and Environmentally Relevant Certification (EERC) Sub-
        Object
