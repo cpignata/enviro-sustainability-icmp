@@ -19,7 +19,7 @@
 <?rfc rfcedstyle="yes"?>
 <?rfc subcompact="no" ?>
 <?rfc symrefs="yes"?>
-<rfc category="exp" docName="draft-pignataro-icmp-enviro-info-00" ipr="trust200902" submissionType="IETF">
+<rfc category="exp" docName="draft-pignataro-icmp-enviro-info-01" ipr="trust200902" submissionType="IETF">
   <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
   <?rfc toc="yes" ?>
   <?rfc compact="yes" ?>
@@ -465,7 +465,7 @@
             between power and traffic load.
             <vspace blankLines="1" />
             There's an in-depth discussion on why we have chosen a 
-            64-bit object type, in <xref target="subobject-formats" />.
+            64-bit object type in <xref target="subobject-formats" />.
           </t>
 
           <t>
