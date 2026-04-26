@@ -14,7 +14,7 @@ Expires: 28 October 2026                                 Arista Networks
 
 
              ICMP Extensions for Environmental Information
-                  draft-pignataro-icmp-enviro-info-00
+                  draft-pignataro-icmp-enviro-info-01
 
 Abstract
 
@@ -593,7 +593,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
        traffic load.
 
        There's an in-depth discussion on why we have chosen a 64-bit
-       object type, in Section 6.
+       object type in Section 6.
 
 6.  Sub-Object Formats
 
