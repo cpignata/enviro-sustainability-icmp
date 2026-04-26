@@ -5,12 +5,12 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Experimental                                  J. Parikh
-Expires: 26 October 2026                                 Arista Networks
+Expires: 28 October 2026                                 Arista Networks
                                                                R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                           24 April 2026
+                                                           26 April 2026
 
 
              ICMP Extensions for Environmental Information
@@ -47,13 +47,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 October 2026.
+   This Internet-Draft will expire on 28 October 2026.
 
 
 
 
 
-Pignataro, et al.        Expires 26 October 2026                [Page 1]
+Pignataro, et al.        Expires 28 October 2026                [Page 1]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 26 October 2026                [Page 2]
+Pignataro, et al.        Expires 28 October 2026                [Page 2]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -125,6 +125,12 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
    now encounter new requirements including enhancing them to cater to a
    significantly increasing demand for monitoring the sustainability and
    environmental impact.
+
+   The IAB had held a workshop on "Environmental Impact of Internet
+   Applications and Systems (eimpactws)" [IAB-EIMPACTWS], in which the
+   need for visibility into environmental sustainability information
+   within traditional Internet tools such as traceroute was highlighted
+   (see WebVTT cue identifiers 139 and 140 of [IAB-EIMPACTWS-Minutes].)
 
    This document serves that need by defining an ICMP extension object
    that appends environmental sustainability information to ICMP
@@ -155,20 +161,21 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
    This document uses the following terms:
 
    ICMP:
+
+
+
+
+Pignataro, et al.        Expires 28 October 2026                [Page 3]
+
+Internet-Draft         ICMP Enviro Info Extensions            April 2026
+
+
       Generically referring to ICMPv4 [RFC0792] and ICMPv6 [RFC4443]
       messages.
 
    ICMP Extension:
       Extended ICMP to support multi-part messages through an ICMP
       extension structure, as defined in [RFC4884].
-
-
-
-
-Pignataro, et al.        Expires 26 October 2026                [Page 3]
-
-Internet-Draft         ICMP Enviro Info Extensions            April 2026
-
 
 2.2.  Requirements Language
 
@@ -183,17 +190,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
    Motivations behind this proposing the extension defined here in this
    document are:
 
-   (1) IAB's Environmental Impact of Internet Applications and
-   Systems (eimpactws)
-
-      The IAB held a workshop on "Environmental Impact of Internet
-      Applications and Systems (eimpactws)" [IAB-EIMPACTWS], in which
-      the need for visibility into environmental sustainability
-      information within traditional Internet tools such as traceroute
-      was highlighted (see WebVTT cue identifiers 139 and 140 of
-      [IAB-EIMPACTWS-Minutes].)
-
-   (2) Native Telemetry Data Availability
+   (1) Native Telemetry Data Availability
 
       Networking chips and devices increasingly measure and expose
       environmental information such as power draw, energy use, thermal
@@ -202,7 +199,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
       deployments efficient from the perspective of power consumption,
       cooling etc.
 
-   (3) Ubiquitous Operational Use
+   (2) Ubiquitous Operational Use
 
       Classic diagnostic tools such as ping and traceroute remain the
       most widely used and universally available command-line utilities
@@ -221,7 +218,10 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026                [Page 4]
+
+
+
+Pignataro, et al.        Expires 28 October 2026                [Page 4]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -240,8 +240,9 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
    comparable to latency or loss, across heterogeneous equipment and
    administrative domains.
 
-   Not mutually exclusive (cross compatible) with any other
-   environmental information retrieval methods.
+   Using ICMP as a “host” for carrying environmental information makes
+   this retrieval method compatible with other approaches.  It also
+   complements, rather than replaces, existing methods.
 
 4.  Transport Options for Environmental Information
 
@@ -276,8 +277,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-
-Pignataro, et al.        Expires 26 October 2026                [Page 5]
+Pignataro, et al.        Expires 28 October 2026                [Page 5]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -333,7 +333,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026                [Page 6]
+Pignataro, et al.        Expires 28 October 2026                [Page 6]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -389,7 +389,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026                [Page 7]
+Pignataro, et al.        Expires 28 October 2026                [Page 7]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -445,7 +445,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026                [Page 8]
+Pignataro, et al.        Expires 28 October 2026                [Page 8]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -457,7 +457,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
        load.
 
        There's an in-depth discussion on why we have chosen a 64-bit
-       object type, in Section Section 6.
+       object type, in Section 6.
 
    3.  Ecolabels and Environmentally Relevant Certification (EERC) Sub-
        Object
@@ -501,7 +501,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026                [Page 9]
+Pignataro, et al.        Expires 28 October 2026                [Page 9]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -557,7 +557,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 10]
+Pignataro, et al.        Expires 28 October 2026               [Page 10]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -613,7 +613,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 11]
+Pignataro, et al.        Expires 28 October 2026               [Page 11]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -669,7 +669,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 12]
+Pignataro, et al.        Expires 28 October 2026               [Page 12]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -725,7 +725,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 13]
+Pignataro, et al.        Expires 28 October 2026               [Page 13]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -781,7 +781,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 14]
+Pignataro, et al.        Expires 28 October 2026               [Page 14]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -837,7 +837,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 15]
+Pignataro, et al.        Expires 28 October 2026               [Page 15]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -893,7 +893,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 16]
+Pignataro, et al.        Expires 28 October 2026               [Page 16]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -949,7 +949,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 17]
+Pignataro, et al.        Expires 28 October 2026               [Page 17]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -1005,7 +1005,7 @@ Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 18]
+Pignataro, et al.        Expires 28 October 2026               [Page 18]
 
 Internet-Draft         ICMP Enviro Info Extensions            April 2026
 
@@ -1061,4 +1061,4 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 26 October 2026               [Page 19]
+Pignataro, et al.        Expires 28 October 2026               [Page 19]

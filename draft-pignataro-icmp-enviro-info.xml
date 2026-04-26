@@ -120,6 +120,14 @@
         impact.
       </t>
       <t>
+        The IAB had held a workshop on "Environmental Impact of Internet 
+        Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, 
+        in which the need for visibility into environmental sustainability 
+        information within traditional Internet tools such as traceroute was 
+        highlighted (see WebVTT cue identifiers 139 and 140 of
+        <xref target="IAB-EIMPACTWS-Minutes" />.)
+      </t>
+      <t>
         This document serves that need by defining an ICMP extension 
         object that appends environmental sustainability information to 
         ICMP messages. Using ICMP as a medium to deliver environmental 
@@ -188,17 +196,7 @@
       <t>
         Motivations behind this proposing the extension defined here in this document are:
         <list style="hanging">
-          <t hangText="(1) IAB's Environmental Impact of Internet 
-                        Applications and Systems (eimpactws)"></t>
-          <t hangText="">
-            The IAB held a workshop on "Environmental Impact of Internet 
-            Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, 
-            in which the need for visibility into environmental sustainability 
-            information within traditional Internet tools such as traceroute was 
-            highlighted (see WebVTT cue identifiers 139 and 140 of
-            <xref target="IAB-EIMPACTWS-Minutes" />.)
-          </t>
-          <t hangText="(2) Native Telemetry Data Availability"></t>
+          <t hangText="(1) Native Telemetry Data Availability"></t>
           <t hangText="">
             Networking chips and devices increasingly measure and expose environmental
             information such as power draw, energy use, thermal data, and other pieces of 
@@ -206,7 +204,7 @@
             large scale network deployments efficient from the perspective of power consumption, 
             cooling etc.
           </t>
-          <t hangText="(3) Ubiquitous Operational Use"></t>
+          <t hangText="(2) Ubiquitous Operational Use"></t>
           <t hangText="">
             Classic diagnostic tools such as ping and traceroute remain the most widely used
             and universally available command-line utilities for network troubleshooting,
@@ -237,8 +235,9 @@
           latency or loss, across heterogeneous equipment and administrative domains.
         </t>
         <t>
-          Not mutually exclusive (cross compatible) with any other environmental
-          information retrieval methods.
+          Using ICMP as a “host” for carrying environmental information makes this retrieval
+          method compatible with other approaches. It also complements, rather than replaces,
+          existing methods.
         </t>
       </section>
     </section>
@@ -466,8 +465,7 @@
             between power and traffic load.
             <vspace blankLines="1" />
             There's an in-depth discussion on why we have chosen a 
-            64-bit object type, in Section
-            <xref target="subobject-formats" />.
+            64-bit object type, in <xref target="subobject-formats" />.
           </t>
 
           <t>
