@@ -16,11 +16,11 @@ Authors: Carlos Pignataro, Jainam Parikh, Ron Bonica, Michael Welzl
 
 ## Building
 
-Formatted text can be regenerated from the XML source using [`xml2rfc`](https://github.com/ietf-tools/xml2rfc):
+- `make` — regenerate `draft-pignataro-icmp-enviro-info.txt` from the XML source using [`xml2rfc`](https://github.com/ietf-tools/xml2rfc), then diff it against the latest revision in `revisions/`
+- `make diff` — just the diff step, producing `draft-pignataro-icmp-enviro-info-diff.html` via [`iddiff`](https://github.com/ietf-tools/iddiff)
+- `make clean` — remove the generated diff output
 
-```sh
-$ xml2rfc draft-pignataro-icmp-enviro-info.xml
-```
+Requires `xml2rfc` and `iddiff` to be installed.
 
 ## Contributing
 
