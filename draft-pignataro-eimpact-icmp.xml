@@ -689,7 +689,7 @@ Trace complete.
         Echo Request message, the ICMP Extension Structure MUST contain exactly 
         one instance of the Interface Identification Object (Section 2.1 of 
         <xref target="RFC8335" />). So, due to the limitation of not being able to
-        append more than one extension obect to an Extended Echo, the extension 
+        append more than one extension object to an Extended Echo, the extension 
         objects defined herein cannot be appended to an Extended Echo Message.
       </t>
     </section>
