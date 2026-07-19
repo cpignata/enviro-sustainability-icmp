@@ -14,6 +14,8 @@
 <!ENTITY RFC.4122 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4122.xml">
 <!ENTITY RFC.9547 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9547.xml">
 <!ENTITY I-D.wkumari-intarea-safe-limited-domains SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-wkumari-intarea-safe-limited-domains-00.xml">
+<!ENTITY I-D.ietf-intarea-rfc8335bis SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-intarea-rfc8335bis-04.xml">
+<!ENTITY I-D.ietf-6man-icmpv6-reflection SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-6man-icmpv6-reflection-19.xml">
 ]>
 <?rfc toc="yes"?>
 <?rfc rfcedstyle="yes"?>
@@ -273,11 +275,11 @@
       </t>
     </section>
 
-    <section title="ICMP Environmental Information Extension">
+    <section anchor="applicable-messages" title="ICMP Environmental Information Extension">
       <t>
         This section defines the Environmental Information Object, an ICMP
         extension object with a Class-Num (Object Class Value) of TBA that can
-        be appended to the following messages, as per <xref target="RFC4884" /> 
+        be appended to the following messages, as per <xref target="RFC4884" />
         and <xref target="RFC8335" />:
       </t>
 
@@ -805,16 +807,41 @@ Trace complete.
       </t>
     </section>
 
-    <section title="Limitations">
+    <section anchor="limitations" title="Limitations">
       <t>
         Section 7 of <xref target="RFC4884" /> defines the ICMP Extension Structure.
         As per RFC 4884, the Extension Structure contains exactly one Extension
-        Header followed by one or more objects.  When applied to the ICMP Extended
-        Echo Request message, the ICMP Extension Structure MUST contain exactly
-        one instance of the Interface Identification Object (Section 2.1 of
-        <xref target="RFC8335" />). So, due to the limitation of not being able to
-        append more than one extension object to an Extended Echo, the extension
-        objects defined herein cannot be appended to an Extended Echo Message.
+        Header followed by one or more objects.  <xref target="RFC8335" /> requires
+        that, when applied to the ICMP Extended Echo Request message in the PROBE
+        application, the ICMP Extension Structure MUST contain exactly one instance
+        of the Interface Identification Object (Section 2.1 of
+        <xref target="RFC8335" />); it does not, however, state that no other
+        object can be present. When responding, a node normally copies the
+        Interface Identification Object (and any other Extension Structure
+        content) from the Extended Echo Request into the Extended Echo Reply
+        unmodified.
+      </t>
+      <t>
+        <xref target="I-D.ietf-intarea-rfc8335bis" />, which is expected to
+        obsolete <xref target="RFC8335" />, clarifies this point: the requirement
+        for exactly one Interface Identification Object applies specifically to
+        the PROBE application, and explicitly states that "the behavior when [the
+        Extension Structure] contains a different Extension Object is not defined
+        by this memo", citing
+        <xref target="I-D.ietf-6man-icmpv6-reflection" /> as an example of a
+        document that defines such a different Extension Object and its
+        corresponding behavior on Extended Echo. This document does the same for
+        the Environmental Information Object: a node responding to an ICMP
+        Extended Echo Request MAY include an Environmental Information Object in
+        the corresponding ICMP Extended Echo Reply, in addition to any Interface
+        Identification Object copied from the Request, as reflected in the
+        message list in <xref target="applicable-messages" />.
+      </t>
+      <t>
+        <xref target="I-D.ietf-intarea-rfc8335bis" /> is, at the time of writing,
+        an active IETF work item that has not yet been published as an RFC; its
+        text, including the passage referenced above, may still change before
+        publication. This section should be revisited if that happens.
       </t>
     </section>
 
@@ -947,6 +974,8 @@ Trace complete.
       &RFC.8799;
       &RFC.9547;
       &I-D.wkumari-intarea-safe-limited-domains;
+      &I-D.ietf-intarea-rfc8335bis;
+      &I-D.ietf-6man-icmpv6-reflection;
 
       <reference anchor="IAB-EIMPACTWS" target="https://datatracker.ietf.org/group/eimpactws/">
         <front>
