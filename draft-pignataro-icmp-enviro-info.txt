@@ -20,11 +20,11 @@ Abstract
 
    This document defines a data structure that can be appended to
    selected ICMP messages.  The ICMP extension defined herein can be
-   used to gain visibility on environmental information on the internet
-   by providing per-hop (i.e., per topological network node) power
-   metrics and other present or future metrics around environmental
-   information.  This will contribute to achieving an objective
-   mentioned in the IAB E-Impact workshop [RFC9547].
+   used to gain visibility into environmental information on the
+   internet by providing per-hop (i.e., per topological network node)
+   power metrics and other present or future metrics around
+   environmental information.  This will contribute to achieving an
+   objective mentioned in the report of the IAB E-Impact workshop.
 
    The techniques presented are useful not only in a transactional
    setting (e.g., a user-issued traceroute or a ping request), but also
@@ -88,22 +88,22 @@ Table of Contents
    7.  Sample Use Case . . . . . . . . . . . . . . . . . . . . . . .  12
    8.  Implementation Status . . . . . . . . . . . . . . . . . . . .  13
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
-   10. Limitations . . . . . . . . . . . . . . . . . . . . . . . . .  15
+   10. Limitations . . . . . . . . . . . . . . . . . . . . . . . . .  16
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
    12. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  18
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  18
      13.1.  Normative References . . . . . . . . . . . . . . . . . .  18
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  18
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  20
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  19
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  21
 
 1.  Introduction
 
-   IP devices use the Internet Control Message Protocol ICMPv4 [RFC0792]
-   and ICMPv6 [RFC4443] to convey control information to source hosts.
-   In particular, when an IP device receives a datagram that it cannot
-   process, it may send an ICMP message to the datagram's originator or
-   source.  Network operators and higher-level protocols use these ICMP
-   messages to detect and diagnose network issues.
+   IP devices use ICMPv4 [RFC0792] and ICMPv6 [RFC4443] to convey
+   control information to source hosts.  In particular, when an IP
+   device receives a datagram that it cannot process, it may send an
+   ICMP message to the datagram's originator or source.  Network
+   operators and higher-level protocols use these ICMP messages to
+   detect and diagnose network issues.
 
 
 
@@ -130,7 +130,8 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    Applications and Systems (eimpactws)" [IAB-EIMPACTWS], in which the
    need for visibility into environmental sustainability information
    within traditional Internet tools such as traceroute was highlighted
-   (see WebVTT cue identifiers 139 and 140 of [IAB-EIMPACTWS-Minutes].)
+   (see WebVTT cue identifiers 139 and 140 of [IAB-EIMPACTWS-Minutes]),
+   as later reported in [RFC9547].
 
    This document serves that need by defining an ICMP extension object
    that appends environmental sustainability information to ICMP
@@ -141,12 +142,12 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    demand setting for different purposes and use cases.
 
    Using the extension defined herein, a device can explicitly append
-   these environmental sustainability information for transmission
-   across an administrative domain:
+   this environmental sustainability information for transmission across
+   an administrative domain:
 
    *  Present and idle power (node level, component level)
    *  Throughput (node level, component level)
-   *  Ecolabels and Environmentally Relevant Certifications (EERCs)
+   *  Ecolabels and Environmentally Relevant Certification (EERC)
 
    Additional environmental sustainability information, such as the
    following, for example, may also be specified in the future:
@@ -161,7 +162,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    This document uses the following terms:
 
    ICMP:
-
 
 
 
@@ -187,7 +187,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 3.  Motivation
 
-   Motivations behind this proposing the extension defined here in this
+   The motivations behind proposing the extension defined in this
    document are:
 
    (1) Native Telemetry Data Availability
@@ -211,8 +211,8 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    (3) Standardization at the Lowest Common Mechanism
 
       We are making use of an already mature, extensible, and widely
-      implemented foundation: RFC 4884 (Extended ICMP for Multi-Part
-      Messages) [RFC4884]
+      implemented foundation: RFC 4884 (Extended ICMP to Support Multi-
+      Part Messages) [RFC4884]
 
 
 
@@ -228,9 +228,10 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 3.1.  Why is ICMP suitable?
 
-   Environmental data already exists in inventories, the novelty is
+   Environmental data already exists in inventories; the novelty is
    surfacing it along the path of live connectivity probes (e.g., ping,
-   traceroute, PROBE [RFC8335]) for real-time, per-hop context.
+   traceroute, or PROBE, the Extended ICMP Echo mechanism defined in
+   [RFC8335]) for real-time, per-hop context.
 
    ICMP is universally implemented, stateless, and tool-agnostic
    enabling lightweight environmental telemetry without new protocols,
@@ -240,7 +241,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    comparable to latency or loss, across heterogeneous equipment and
    administrative domains.
 
-   Using ICMP as a “host” for carrying environmental information makes
+   Using ICMP as a "host" for carrying environmental information makes
    this retrieval method compatible with other approaches.  It also
    complements, rather than replaces, existing methods.
 
@@ -269,7 +270,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    compatible, and scale-proven ICMP extension [RFC4884].  This does not
    preclude the definition of other methods to transport environmental
    information, more fitting to other use-cases.
-
 
 
 
@@ -459,7 +459,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
        message to determine a relationship between power and traffic
        load.
 
-       There's an in-depth discussion on why we have chosen a 64-bit
+       There is an in-depth discussion on why we have chosen a 64-bit
        object type in Section 6.
 
    3.  Ecolabels and Environmentally Relevant Certification (EERC) Sub-
@@ -482,7 +482,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
        Relevant Certification (EERC) number.  The following EERC numbers
        are defined by the present specification:
 
-       1.  ISO 14001:2015 [EERC-ISO14001_2015]
+       1.  ISO 14001:2015 [EERC-ISO14001-2015]
 
        2.  TCO Certified [EERC-TCO]
 
@@ -530,16 +530,16 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
        Length value of 4 indicates that this object is unavailable.
 
        The returned value is one or more instances of component-level
-       power drawn metrics.  Each instance is a set comprised by a UUID
-       [RFC4122] uniquely identifying the component, and the Present
-       Component Power and Idle Component Power fields.  The Present
-       Component Power is the component-level power being presently
-       drawn, which is a magnitude that may be directly displayed, and
-       is expressed in Watts (W).  A value of 0 indicates that the
-       Present Component Power is not available.  The Idle Component
-       Power is the component-level power when the component is idle.  A
-       value of 0 indicates that the Idle Component Power is not
-       available.
+       power drawn metrics.  Each instance is a set comprised by a
+       Universally Unique Identifier (UUID) [RFC9562] uniquely
+       identifying the component, and the Present Component Power and
+       Idle Component Power fields.  The Present Component Power is the
+       component-level power being presently drawn, which is a magnitude
+       that may be directly displayed, and is expressed in Watts (W).  A
+       value of 0 indicates that the Present Component Power is not
+       available.  The Idle Component Power is the component-level power
+       when the component is idle.  A value of 0 indicates that the Idle
+       Component Power is not available.
 
    5.  Component-level Throughput Sub-Object
 
@@ -592,18 +592,18 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
        the ICMP message to determine a relationship between power and
        traffic load.
 
-       There's an in-depth discussion on why we have chosen a 64-bit
+       There is an in-depth discussion on why we have chosen a 64-bit
        object type in Section 6.
 
 6.  Sub-Object Formats
 
    As discussed in Section 5.2, we have chosen 64-bit sub-objects to
-   accommodate the present trends of the industry with respect to high
+   accommodate the present trends of the industry with respect to high-
    density ports/components and nodes.  Organizations now have
-   components/interfaces/line cards with 100/400/800Gbps throughput and
-   nodes with a combined throughput exceeding 10Tbps.  This cannot be
-   represented in a field which is only 32-bit long.  A 32-bit field can
-   only represent a max throughput of 4Gbps (2 ^ 32 bps).  To address
+   components/interfaces/line cards with 100/400/800 Gbps throughput and
+   nodes with a combined throughput exceeding 10 Tbps.  This cannot be
+   represented in a field that is only 32 bits long.  A 32-bit field can
+   only represent a max throughput of 4 Gbps (2^32 bps).  To address
    this, we define a "wider" 64-bit Sub-Object format.
 
    We could have defined both the "wide" (64-bit) and "short" (32-bit)
@@ -730,7 +730,7 @@ Pignataro, et al.        Expires 21 January 2027               [Page 13]
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
-       *  Receiver (receiver.py) — waits for incoming data.  Requires
+       *  Receiver (receiver.py) -- waits for incoming data.  Requires
           two arguments: (0 or 1)
           --interfaceIdentifyFlag: Tells the receiver to include the
           Interface Identification Object [RFC8335] in the response or
@@ -738,8 +738,15 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
           --greenFlag: Tells the receiver to include the Environmental
           Information Object (this document) in the response or not
 
-       *  Sender (sender.py) — connects to the receiver and sends data.
+       *  Sender (sender.py) -- connects to the receiver and sends data.
           Simply sends an ICMP Extended Echo Request to the receiver.py
+
+       *  As an experimental extension, this implementation also
+          demonstrates repurposing the unused value 7 of the Extended
+          Echo Reply "State" field [RFC8335] to signal that the reply
+          carries only the Environmental Information Object, without an
+          Interface Identification Object.  This is not currently part
+          of this specification; see Section 10.
 
 9.  Security Considerations
 
@@ -751,12 +758,12 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    Care should be taken, as improperly specified length attributes and
    other syntax problems may result in buffer overruns.
 
-   This document does not define the conditions under which a router
-   sends an ICMP message.  Therefore, it does not expose routers to any
-   new denial-of-service attacks.  Routers may need to limit the rate at
-   which ICMP messages are sent.
+   This document does not define the conditions under which a node sends
+   an ICMP message.  Therefore, it does not expose nodes to any new
+   denial-of-service attacks.  Nodes may need to limit the rate at which
+   ICMP messages are sent.
 
-   The extensions defined in this document allows a router to append
+   The extensions defined in this document allow a node to append
    environmental sustainability information to multi-part ICMP messages,
    and therefore can provide the user of the traceroute and ping
    applications with additional information.
@@ -767,17 +774,10 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    information in ICMP responses.  These mechanisms are not initially
    intended for other uses.
 
-   Some of the additional information provided, as e.g., power draw
-   information, have privacy considerations.  For example, behavioral
-   considerations of the devices, or estimating other node and network
-   attributes from the power or energy data.  Other things like
-   identification of the node, deducing node usage patterns are some
-   more privacy concerns that can be related to the information.
 
-   Keeping these considerations in mind, we limited the scope of the
-   transportation of the environmental information to a single
-   administrative domain (AD).  But, based on [RFC8799], limiting a
-   protocol's functionality doesn't mean that it will be secure.  So,
+
+
+
 
 
 
@@ -786,6 +786,17 @@ Pignataro, et al.        Expires 21 January 2027               [Page 14]
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
+   Some of the additional information provided, e.g., power draw
+   information, has privacy considerations.  For example, behavioral
+   considerations of the devices, or estimating other node and network
+   attributes from the power or energy data.  Other things like
+   identification of the node, or deducing node usage patterns, are some
+   more privacy concerns that can be related to the information.
+
+   Keeping these considerations in mind, we limited the scope of the
+   transportation of the environmental information to a single
+   administrative domain (AD).  But, based on [RFC8799], limiting a
+   protocol's functionality doesn't mean that it will be secure.  So,
    this particular document, which defines "a modified ICMP message with
    environmental information", can be classified as a FAIL-OPEN protocol
    [I-D.wkumari-intarea-safe-limited-domains].  That is, the interfaces
@@ -797,9 +808,9 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    only strip off the extension objects and only forward the ICMP
    message if it is destined to go out of the AD.
 
-   When environmental information are limited to the same AD, it can be
-   considered that they can be generated from a valid source and will
-   have integrity.
+   When environmental information is limited to the same AD, it can be
+   considered that it can be generated from a valid source and will have
+   integrity.
 
    High-fidelity reporting of power draw for the targeted node's memory,
    cache, hardware security module, or other sensitive component could
@@ -807,7 +818,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    using differential power analysis) during cryptographic operations.
    This attack would allow the adversary to extract the network node's
    secret key(s) or other sensitive data.  There are a couple of ways of
-   mitigating this type of attack; exclude power metrics for components
+   mitigating this type of attack: exclude power metrics for components
    that process sensitive data or provide countermeasures that introduce
    noise in the reported power metrics (e.g., software that demarcates
    sensitive data which signals the processing hardware to treat this
@@ -817,6 +828,19 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    Finally, this document does not specify an authentication mechanism
    for the extension that it defines.  Application developers should be
    aware of various ICMP attacks [RFC5927].
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 21 January 2027               [Page 15]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
 
 10.  Limitations
 
@@ -831,16 +855,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    Identification Object (and any other Extension Structure content)
    from the Extended Echo Request into the Extended Echo Reply
    unmodified.
-
-
-
-
-
-
-Pignataro, et al.        Expires 21 January 2027               [Page 15]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
 
    [I-D.ietf-intarea-rfc8335bis], which is expected to obsolete
    [RFC8335], clarifies this point: the requirement for exactly one
@@ -861,11 +875,28 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    including the passage referenced above, may still change before
    publication.  This section should be revisited if that happens.
 
+   One implementation (see Section on Implementation Status) has
+   experimented with working around this limitation by repurposing an
+   unused value of the Extended Echo Reply "State" field to signal that
+   the reply carries only the Environmental Information Object, without
+   an Interface Identification Object.  This is not currently
+   standardized: it is not defined by [RFC8335], is not specified by
+   this document, and would require separate specification work
+   (including IANA allocation of the "State" value used) before it could
+   be relied upon.
+
 11.  IANA Considerations
 
    IANA is requested to assign the following object Class-num in the
    ICMP Extension Object Classes and Class Sub-types registry
    [IANA-ICMP-Extended]:
+
+
+
+Pignataro, et al.        Expires 21 January 2027               [Page 16]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
 
     +=============+==================================+===============+
     | Class Value | Class name                       | Reference     |
@@ -878,25 +909,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    IANA is requested to establish a subregistry, within the Internet
    Control Message Protocol (ICMP) Parameters registry group, for the
    corresponding class sub-type (C-Type) space, as follows:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 21 January 2027               [Page 16]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
 
      +==============+===============================+===============+
      | C-Type Value | Description                   | Reference     |
@@ -929,6 +941,19 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    for Ecolabels and Environmentally Relevant Certification (EERC)
    numbers (C-Type 3), as follows:
 
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 21 January 2027               [Page 17]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
+
       +=============+==============================+===============+
       | Number      | Name                         | Reference     |
       +=============+==============================+===============+
@@ -946,13 +971,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
       +-------------+------------------------------+---------------+
 
                           Table 3: EERC numbers
-
-
-
-Pignataro, et al.        Expires 21 January 2027               [Page 17]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
 
    EERC numbers are assignable on a first-come-first-serve (FCFS) basis,
    and require a citation to the definition of the certification.
@@ -976,10 +994,27 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 13.1.  Normative References
 
+   [RFC0792]  Postel, J., "Internet Control Message Protocol", STD 5,
+              RFC 792, DOI 10.17487/RFC792, September 1981,
+              <https://www.rfc-editor.org/info/rfc792>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+Pignataro, et al.        Expires 21 January 2027               [Page 18]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
+
+   [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
+              Control Message Protocol (ICMPv6) for the Internet
+              Protocol Version 6 (IPv6) Specification", STD 89,
+              RFC 4443, DOI 10.17487/RFC4443, March 2006,
+              <https://www.rfc-editor.org/info/rfc4443>.
 
    [RFC4884]  Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
               "Extended ICMP to Support Multi-Part Messages", RFC 4884,
@@ -995,6 +1030,10 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               RFC 8335, DOI 10.17487/RFC8335, February 2018,
               <https://www.rfc-editor.org/info/rfc8335>.
 
+   [RFC9562]  Davis, K., Peabody, B., and P. Leach, "Universally Unique
+              IDentifiers (UUIDs)", RFC 9562, DOI 10.17487/RFC9562, May
+              2024, <https://www.rfc-editor.org/info/rfc9562>.
+
 13.2.  Informative References
 
    [EERC-EEE] "IEEE Standard for Information technology-- Local and
@@ -1002,24 +1041,30 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               3: CSMA/CD Access Method and Physical Layer Specifications
               Amendment 5: Media Access Control Parameters, Physical
               Layers, and Management Parameters for Energy-Efficient
-
-
-
-Pignataro, et al.        Expires 21 January 2027               [Page 18]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
-
               Ethernet", IEEE Std 802.3az-2010 (Amendment to IEEE Std
               802.3-2008), 27 October 2010,
               <https://standards.ieee.org/ieee/802.3az/4270/>.
 
-   [EERC-ISO14001_2015]
+   [EERC-ISO14001-2015]
               "ISO 14001:2015 Environmental management systems.
               Requirements with guidance for use", September 2015,
               <https://www.iso.org/standard/60857.html>.
 
    [EERC-TCO] "TCO Certified", <https://tcocertified.com/>.
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 21 January 2027               [Page 19]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
 
    [I-D.ietf-6man-icmpv6-reflection]
               Mizrahi, T., hexiaoming, X., Zhou, T., Bonica, R., and X.
@@ -1038,11 +1083,12 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               rfc8335bis-04>.
 
    [I-D.wkumari-intarea-safe-limited-domains]
-              Kumari, W. A., Alston, A., Vyncke, E., and S. Krishnan,
-              "Safe(r) Limited Domains", Work in Progress, Internet-
-              Draft, draft-wkumari-intarea-safe-limited-domains-00, 19
-              January 2024, <https://datatracker.ietf.org/doc/html/
-              draft-wkumari-intarea-safe-limited-domains-00>.
+              Kumari, W., Alston, A., Vyncke, E., Krishnan, S., and D.
+              E. Eastlake, "Safe(r) Limited Domains", Work in Progress,
+              Internet-Draft, draft-wkumari-intarea-safe-limited-
+              domains-06, 1 March 2026,
+              <https://datatracker.ietf.org/doc/html/draft-wkumari-
+              intarea-safe-limited-domains-06>.
 
    [IAB-EIMPACTWS]
               "IAB workshop on Environmental Impact of Internet
@@ -1055,37 +1101,11 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               <https://datatracker.ietf.org/doc/minutes-interim-2022-
               eimpactws-04-202212121400/>.
 
-
-
-
-
-
-
-Pignataro, et al.        Expires 21 January 2027               [Page 19]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
-
    [IANA-ICMP-Extended]
               "Internet Control Message Protocol (ICMP) Parameters, ICMP
               Extension Object Classes and Class Sub-types",
               <https://www.iana.org/assignments/icmp-parameters/icmp-
               parameters.xhtml#icmp-parameters-ext-classes>.
-
-   [RFC0792]  Postel, J., "Internet Control Message Protocol", STD 5,
-              RFC 792, DOI 10.17487/RFC792, September 1981,
-              <https://www.rfc-editor.org/info/rfc792>.
-
-   [RFC4122]  Leach, P., Mealling, M., and R. Salz, "A Universally
-              Unique IDentifier (UUID) URN Namespace", RFC 4122,
-              DOI 10.17487/RFC4122, July 2005,
-              <https://www.rfc-editor.org/info/rfc4122>.
-
-   [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
-              Control Message Protocol (ICMPv6) for the Internet
-              Protocol Version 6 (IPv6) Specification", STD 89,
-              RFC 4443, DOI 10.17487/RFC4443, March 2006,
-              <https://www.rfc-editor.org/info/rfc4443>.
 
    [RFC5927]  Gont, F., "ICMP Attacks against TCP", RFC 5927,
               DOI 10.17487/RFC5927, July 2010,
@@ -1094,6 +1114,13 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
               Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
               <https://www.rfc-editor.org/info/rfc8799>.
+
+
+
+Pignataro, et al.        Expires 21 January 2027               [Page 20]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
 
    [RFC9547]  Arkko, J., Perkins, C. S., and S. Krishnan, "Report from
               the IAB Workshop on Environmental Impact of Internet
@@ -1114,14 +1141,6 @@ Authors' Addresses
    5453 Great America Parkway
    Santa Clara,  95035
    United States of America
-
-
-
-Pignataro, et al.        Expires 21 January 2027               [Page 20]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
-
    Email: jainam@parikhgroup.net
 
 
@@ -1135,25 +1154,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    University of Oslo
    Norway
    Email: michawe@ifi.uio.no
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
