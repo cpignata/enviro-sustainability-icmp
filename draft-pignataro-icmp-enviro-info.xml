@@ -16,6 +16,7 @@
 <!ENTITY I-D.wkumari-intarea-safe-limited-domains SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-wkumari-intarea-safe-limited-domains-06.xml">
 <!ENTITY I-D.ietf-intarea-rfc8335bis SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-intarea-rfc8335bis-04.xml">
 <!ENTITY I-D.ietf-6man-icmpv6-reflection SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-6man-icmpv6-reflection-19.xml">
+<!ENTITY I-D.petra-green-api SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-petra-green-api-04.xml">
 ]>
 <?rfc toc="yes"?>
 <?rfc rfcedstyle="yes"?>
@@ -259,14 +260,24 @@
         transports.
       </t>
       <t>
-        For the second task, there is a variety of options available depending 
-        on use cases. These can be categorized based on whether the approach is 
-        distributed (i.e., any endpoint or node can request and/or receive the 
-        environmental information) or centralized (i.e., a single 'controller' 
-        compiles and consolidates the information.) They can also be categorized 
-        based on the networking layer used (e.g., IP, like ICMP, or applications, 
-        like SNMP). Further, an existing protocol can be extended, or a brand 
+        For the second task, there is a variety of options available depending
+        on use cases. These can be categorized based on whether the approach is
+        distributed (i.e., any endpoint or node can request and/or receive the
+        environmental information) or centralized (i.e., a single 'controller'
+        compiles and consolidates the information.) They can also be categorized
+        based on the networking layer used (e.g., IP, like ICMP, or applications,
+        like SNMP). Further, an existing protocol can be extended, or a brand
         new protocol can potentially be created for this purpose.
+      </t>
+      <t>
+        As an example of a centralized, application-layer mechanism for
+        consuming environmental information, <xref target="I-D.petra-green-api" />
+        defines a YANG-modeled, RESTCONF-based API through which a
+        controller can expose per-path energy and carbon-intensity metrics
+        to consumers. That work explicitly leaves the underlying
+        measurement and data-sourcing mechanism out of scope; the per-hop
+        information carried in the ICMP extension object defined in this
+        document is one possible way to help populate it.
       </t>
       <t>
         This document builds upon a standardized, modular,
@@ -534,8 +545,8 @@
             elements included. A Length value of 4 indicates that
             this object is unavailable.
             <vspace blankLines="1" />
-            The returned value is one or more instances of component-level 
-            power drawn metrics. Each instance is a set comprised by a 
+            The returned value is one or more instances of component-level
+            power drawn metrics. Each instance is a set comprised by a
             Universally Unique Identifier (UUID) <xref target="RFC9562" />
             uniquely identifying the component, and
             the Present Component Power and Idle Component Power fields.
@@ -545,6 +556,18 @@
             Present Component Power is not available. The Idle Component Power
             is the component-level power when the component is idle. A value
             of 0 indicates that the Idle Component Power is not available.
+            <vspace blankLines="1" />
+            The UUID identifies a specific component (e.g., a fan, a line
+            card, or an optical module) and is otherwise opaque to this
+            protocol: this document does not define a mechanism to map a
+            UUID to a human-readable component name, which is a local,
+            implementation-specific matter (e.g., derived from local
+            inventory information). Node-level (as opposed to
+            component-level) power is conveyed using the Node Power Draw
+            Sub-Object and never appears in this sub-object; consequently,
+            the Nil UUID (all zero bits, see Section 5.9 of
+            <xref target="RFC9562" />) is reserved and MUST NOT be used to
+            represent the node itself within this sub-object.
           </t>
 
           <t>
@@ -575,14 +598,16 @@
             elements included. A Length value of 4 indicates that
             this object is unavailable.
             <vspace blankLines="1" />
-            The returned value is one or more instances of component-level 
-            throughput. Each instance is a set comprised by a UUID uniquely 
-            identifying the component, and the actual throughput of said 
-            component in bits-per-second (bps). This allows the recipient 
-            of the ICMP message to determine a relationship between power 
-            and traffic load.
+            The returned value is one or more instances of component-level
+            throughput. Each instance is a set comprised by a UUID uniquely
+            identifying the component, and the actual throughput of said
+            component in bits-per-second (bps). This allows the recipient
+            of the ICMP message to determine a relationship between power
+            and traffic load. The UUID has the same semantics described for
+            the Component-level Power Draw Sub-Object above, including the
+            reservation of the Nil UUID.
             <vspace blankLines="1" />
-            There is an in-depth discussion on why we have chosen a 
+            There is an in-depth discussion on why we have chosen a
             64-bit object type in <xref target="subobject-formats" />.
           </t>
         </list>
@@ -705,6 +730,38 @@ Trace complete.
       the user to decide how frequently queries are issued, when and how these metrics are reported,
       or which policy will guide such decisions.
       </t>
+
+      <section title="Policy-Based Path Selection Using EERC Information">
+        <t>
+          One concrete use of the EERC information carried by this extension
+          is to inform path selection according to a sustainability policy.
+          An administrative domain may have multiple candidate paths, or
+          equal-cost paths, between a source and a destination, and may wish
+          to prefer the "greenest" path, i.e., the path whose nodes satisfy a
+          given set of ecolabel or certification requirements.
+        </t>
+        <t>
+          For example, using the traceroute output in
+          <xref target="use-case-1" />, an administrator with a policy that
+          requires all hops on the selected path to hold both ISO 14001:2015
+          certification and to support Energy-efficient Ethernet can observe
+          that hop 1 (203.0.113.118) and hop 4 (192.0.2.122) satisfy that
+          policy (EERC(ISO 14001:2015, Energy-efficient ethernet)), while
+          hop 2 (192.0.2.9) does not (EERC(ISO 14001:2015) only). An
+          orchestration system periodically collecting this information
+          across candidate paths, in a "scheduled automated" fashion, could
+          use it as an input, together with other metrics such as power
+          draw and throughput, to prefer paths composed of nodes meeting the
+          desired certification criteria, or to flag paths that do not.
+        </t>
+        <t>
+          This is one example of a broader class of policy or orchestration
+          decisions that can use the environmental sustainability
+          information defined in this document as an input; this document
+          does not itself define such policies or the mechanisms to apply
+          them, which are local matters.
+        </t>
+      </section>
     </section>
 
 
@@ -999,6 +1056,7 @@ Trace complete.
       &I-D.wkumari-intarea-safe-limited-domains;
       &I-D.ietf-intarea-rfc8335bis;
       &I-D.ietf-6man-icmpv6-reflection;
+      &I-D.petra-green-api;
 
       <reference anchor="IAB-EIMPACTWS" target="https://datatracker.ietf.org/group/eimpactws/">
         <front>
