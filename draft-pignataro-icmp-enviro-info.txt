@@ -308,7 +308,9 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
    A single ICMP message can contain zero, one, or multiple instances of
    Environmental Information Objects.  The C-Type further identifies the
-   information fields carried.
+   information fields carried.  The Environmental Information Object can
+   be appended to any existing ICMP Extension Objects, subject to the
+   limitations discussed in Section 10.
 
    A single instance of the Environmental Information Object can convey
    one of the information elements defined in Section 5.2 from each
@@ -329,14 +331,14 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    ~                        Object payload                         ~
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
 
-         Figure 1: ICMP Environmental Information Extension Format
-
 
 
 Pignataro, et al.        Expires 20 January 2027                [Page 6]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
+
+         Figure 1: ICMP Environmental Information Extension Format
 
    (1) ICMP Extension Header
 
@@ -381,11 +383,9 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    The ICMP Environmental Information Extension Object header has the
    following format:
 
-                        1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |             Length            | Class-Num=TBA | C-Type=1-255  |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+
 
 
 
@@ -393,6 +393,12 @@ Pignataro, et al.        Expires 20 January 2027                [Page 7]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
+
+                        1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |             Length            | Class-Num=TBA | C-Type=1-255  |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
         Figure 2: Environmental Information Extension Object Header
 
@@ -436,12 +442,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
        A Class-Num of TBA and a C-Type of 2 are specified.
 
-       The Length is 12 if the object contains this payload.  A Length
-       value of 4 indicates that it is unavailable.
-
-
-
-
 
 
 
@@ -449,6 +449,9 @@ Pignataro, et al.        Expires 20 January 2027                [Page 8]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
+
+       The Length is 12 if the object contains this payload.  A Length
+       value of 4 indicates that it is unavailable.
 
        The returned value is the node-level present throughput, which is
        a magnitude that may be directly displayed, and is expressed in
@@ -489,9 +492,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
        was issued, or 0 to indicate "unknown" or "not specified".
 
    4.  Component-level Power Draw Sub-Object
-
-
-
 
 
 
@@ -821,19 +821,19 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
    Section 7 of [RFC4884] defines the ICMP Extension Structure.  As per
    RFC 4884, the Extension Structure contains exactly one Extension
-   Header followed by one or more objects.  When applied to the ICMP
-   Extended Echo Request message, the ICMP Extension Structure MUST
-   contain exactly one instance of the Interface Identification Object
-   (Section 2.1 of [RFC8335]).  So, due to the limitation of not being
-   able to append more than one extension object to an Extended Echo,
-   the extension objects defined herein cannot be appended to an
-   Extended Echo Message.
+   Header followed by one or more objects.
+
+   The extension structure defined in this draft, the Environmental
+   Information Object, cannot be appended after the ICMP Extended Echo
+   Request message, for the PROBE application, as discussed in the
+   Section 2 of [I-D.ietf-intarea-rfc8335bis].
 
 11.  IANA Considerations
 
    IANA is requested to assign the following object Class-num in the
    ICMP Extension Object Classes and Class Sub-types registry
    [IANA-ICMP-Extended]:
+
 
 
 
@@ -986,20 +986,20 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
    [EERC-TCO] "TCO Certified", <https://tcocertified.com/>.
 
+   [I-D.ietf-intarea-rfc8335bis]
+              Fenner, B., Bonica, R. P., Thomas, R., Linkova, J.,
+              Lenart, C., and M. Boucadair, "PROBE: A Utility for
+              Probing Interfaces", Work in Progress, Internet-Draft,
+              draft-ietf-intarea-rfc8335bis-04, 17 April 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-intarea-
+              rfc8335bis-04>.
+
    [I-D.wkumari-intarea-safe-limited-domains]
               Kumari, W. A., Alston, A., Vyncke, E., and S. Krishnan,
               "Safe(r) Limited Domains", Work in Progress, Internet-
               Draft, draft-wkumari-intarea-safe-limited-domains-00, 19
               January 2024, <https://datatracker.ietf.org/doc/html/
               draft-wkumari-intarea-safe-limited-domains-00>.
-
-   [IAB-EIMPACTWS]
-              "IAB workshop on Environmental Impact of Internet
-              Applications and Systems (eimpactws)", December 2022,
-              <https://datatracker.ietf.org/group/eimpactws/>.
-
-
-
 
 
 
@@ -1009,6 +1009,11 @@ Pignataro, et al.        Expires 20 January 2027               [Page 18]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
+
+   [IAB-EIMPACTWS]
+              "IAB workshop on Environmental Impact of Internet
+              Applications and Systems (eimpactws)", December 2022,
+              <https://datatracker.ietf.org/group/eimpactws/>.
 
    [IAB-EIMPACTWS-Minutes]
               "Minutes for the IAB E-Impact Workshop Session 4: Next
@@ -1053,17 +1058,18 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 Authors' Addresses
 
-   Carlos Pignataro
-   North Carolina State University
-   United States of America
-   Email: cpignata@gmail.com, cmpignat@ncsu.edu
-
 
 
 
 Pignataro, et al.        Expires 20 January 2027               [Page 19]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
+
+   Carlos Pignataro
+   North Carolina State University
+   United States of America
+   Email: cpignata@gmail.com, cmpignat@ncsu.edu
 
 
    Jainam Parikh
@@ -1084,12 +1090,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    University of Oslo
    Norway
    Email: michawe@ifi.uio.no
-
-
-
-
-
-
 
 
 

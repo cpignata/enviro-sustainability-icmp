@@ -14,6 +14,7 @@
 <!ENTITY RFC.4122 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4122.xml">
 <!ENTITY RFC.9547 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9547.xml">
 <!ENTITY I-D.wkumari-intarea-safe-limited-domains SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-wkumari-intarea-safe-limited-domains-00.xml">
+<!ENTITY I-D.ietf-intarea-rfc8335bis SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-intarea-rfc8335bis-04.xml">
 ]>
 <?rfc toc="yes"?>
 <?rfc rfcedstyle="yes"?>
@@ -301,17 +302,18 @@
         considerations.
       </t>
       <t>
-        These extensions are preceded by an
-        ICMP Extension Structure Header, and include an ICMP Object Header. 
-        Both are defined in <xref target="RFC4884" />. The same backward 
-        compatibility issues that apply to <xref target="RFC4884" /> apply 
-        to this extension.
+        These extensions are preceded by an ICMP Extension Structure Header,
+        and include an ICMP Object Header. Both are defined in <xref target="RFC4884" />.
+        The same backward compatibility issues that apply to <xref target="RFC4884" />
+        apply to this extension.
       </t>
 
       <t>
         A single ICMP message can contain zero, one, or multiple instances of 
         Environmental Information Objects.  The C-Type further identifies the 
-        information fields carried.
+        information fields carried. The Environmental Information Object can
+        be appended to any existing ICMP Extension Objects, subject to the limitations
+        discussed in <xref target="limitations" />.
       </t>
       <t>
         A single instance of the Environmental Information Object can convey 
@@ -805,20 +807,20 @@ Trace complete.
       </t>
     </section>
 
-    <section title="Limitations">
+    <section title="Limitations" anchor="limitations">
       <t>
         Section 7 of <xref target="RFC4884" /> defines the ICMP Extension Structure.
         As per RFC 4884, the Extension Structure contains exactly one Extension
-        Header followed by one or more objects.  When applied to the ICMP Extended
-        Echo Request message, the ICMP Extension Structure MUST contain exactly
-        one instance of the Interface Identification Object (Section 2.1 of
-        <xref target="RFC8335" />). So, due to the limitation of not being able to
-        append more than one extension object to an Extended Echo, the extension
-        objects defined herein cannot be appended to an Extended Echo Message.
+        Header followed by one or more objects.
+      </t>
+      <t>
+        The extension structure defined in this draft, the Environmental Information
+        Object, cannot be appended after the ICMP Extended Echo Request message,
+        for the PROBE application, as discussed in the Section 2 of <xref target="I-D.ietf-intarea-rfc8335bis" />.
       </t>
     </section>
 
-    <section title="IANA Considerations">
+    <section title="IANA Considerations" anchor="iana-considerations">
       <t>
         IANA is requested to assign the following object Class-num in the ICMP 
         Extension Object Classes and Class Sub-types registry 
@@ -947,6 +949,7 @@ Trace complete.
       &RFC.8799;
       &RFC.9547;
       &I-D.wkumari-intarea-safe-limited-domains;
+      &I-D.ietf-intarea-rfc8335bis;
 
       <reference anchor="IAB-EIMPACTWS" target="https://datatracker.ietf.org/group/eimpactws/">
         <front>
