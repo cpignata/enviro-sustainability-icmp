@@ -88,11 +88,12 @@ Table of Contents
    7.  Sample Use Case . . . . . . . . . . . . . . . . . . . . . . .  12
    8.  Implementation Status . . . . . . . . . . . . . . . . . . . .  13
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  17
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  17
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  17
-     12.2.  Informative References . . . . . . . . . . . . . . . . .  17
+   10. Limitations . . . . . . . . . . . . . . . . . . . . . . . . .  15
+   11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
+   12. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  17
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  17
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  17
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  18
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
@@ -103,7 +104,6 @@ Table of Contents
    process, it may send an ICMP message to the datagram's originator or
    source.  Network operators and higher-level protocols use these ICMP
    messages to detect and diagnose network issues.
-
 
 
 
@@ -817,11 +817,30 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    for the extension that it defines.  Application developers should be
    aware of various ICMP attacks [RFC5927].
 
-10.  IANA Considerations
+10.  Limitations
+
+   Section 7 of [RFC4884] defines the ICMP Extension Structure.  As per
+   RFC 4884, the Extension Structure contains exactly one Extension
+   Header followed by one or more objects.  When applied to the ICMP
+   Extended Echo Request message, the ICMP Extension Structure MUST
+   contain exactly one instance of the Interface Identification Object
+   (Section 2.1 of [RFC8335]).  So, due to the limitation of not being
+   able to append more than one extension object to an Extended Echo,
+   the extension objects defined herein cannot be appended to an
+   Extended Echo Message.
+
+11.  IANA Considerations
 
    IANA is requested to assign the following object Class-num in the
    ICMP Extension Object Classes and Class Sub-types registry
    [IANA-ICMP-Extended]:
+
+
+
+Pignataro, et al.        Expires 20 January 2027               [Page 15]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
 
     +=============+==================================+===============+
     | Class Value | Class name                       | Reference     |
@@ -834,13 +853,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    IANA is requested to establish a subregistry, within the Internet
    Control Message Protocol (ICMP) Parameters registry group, for the
    corresponding class sub-type (C-Type) space, as follows:
-
-
-
-Pignataro, et al.        Expires 20 January 2027               [Page 15]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
 
      +==============+===============================+===============+
      | C-Type Value | Description                   | Reference     |
@@ -873,6 +885,19 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    for Ecolabels and Environmentally Relevant Certification (EERC)
    numbers (C-Type 3), as follows:
 
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 20 January 2027               [Page 16]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
+
       +=============+==============================+===============+
       | Number      | Name                         | Reference     |
       +=============+==============================+===============+
@@ -891,17 +916,10 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
                           Table 3: EERC numbers
 
-
-
-Pignataro, et al.        Expires 20 January 2027               [Page 16]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
-
    EERC numbers are assignable on a first-come-first-serve (FCFS) basis,
    and require a citation to the definition of the certification.
 
-11.  Acknowledgements
+12.  Acknowledgements
 
    We are very grateful to Jari Arkko for his support, thorough review,
    and a useful set of comments and suggestions.  We are also
@@ -916,14 +934,25 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    We would also like to thank David Dong for his early IANA review and
    useful feedback.
 
-12.  References
+13.  References
 
-12.1.  Normative References
+13.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 20 January 2027               [Page 17]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
 
    [RFC4884]  Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
               "Extended ICMP to Support Multi-Part Messages", RFC 4884,
@@ -939,21 +968,13 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               RFC 8335, DOI 10.17487/RFC8335, February 2018,
               <https://www.rfc-editor.org/info/rfc8335>.
 
-12.2.  Informative References
+13.2.  Informative References
 
    [EERC-EEE] "IEEE Standard for Information technology-- Local and
               metropolitan area networks-- Specific requirements-- Part
               3: CSMA/CD Access Method and Physical Layer Specifications
               Amendment 5: Media Access Control Parameters, Physical
               Layers, and Management Parameters for Energy-Efficient
-
-
-
-Pignataro, et al.        Expires 20 January 2027               [Page 17]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
-
               Ethernet", IEEE Std 802.3az-2010 (Amendment to IEEE Std
               802.3-2008), 27 October 2010,
               <https://standards.ieee.org/ieee/802.3az/4270/>.
@@ -977,6 +998,18 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               Applications and Systems (eimpactws)", December 2022,
               <https://datatracker.ietf.org/group/eimpactws/>.
 
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 20 January 2027               [Page 18]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
+
    [IAB-EIMPACTWS-Minutes]
               "Minutes for the IAB E-Impact Workshop Session 4: Next
               Steps", eimpactws Session 4, 12 December 2022,
@@ -997,18 +1030,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               Unique IDentifier (UUID) URN Namespace", RFC 4122,
               DOI 10.17487/RFC4122, July 2005,
               <https://www.rfc-editor.org/info/rfc4122>.
-
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 20 January 2027               [Page 18]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
 
    [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
               Control Message Protocol (ICMPv6) for the Internet
@@ -1038,6 +1059,13 @@ Authors' Addresses
    Email: cpignata@gmail.com, cmpignat@ncsu.edu
 
 
+
+
+Pignataro, et al.        Expires 20 January 2027               [Page 19]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
+
    Jainam Parikh
    Arista Networks
    5453 Great America Parkway
@@ -1061,4 +1089,32 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 20 January 2027               [Page 19]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 20 January 2027               [Page 20]
