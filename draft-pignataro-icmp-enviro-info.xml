@@ -822,7 +822,8 @@ Trace complete.
         </texttable>
         
       <t>
-        IANA is requested to establish a registry for the corresponding class sub-type
+        IANA is requested to establish a subregistry, within the Internet Control Message
+        Protocol (ICMP) Parameters registry group, for the corresponding class sub-type
         (C-Type) space, as follows:
       </t>
 
@@ -861,7 +862,8 @@ Trace complete.
       </t>
 
       <t>
-        IANA is requested to establish a sub-registry for Ecolabels and 
+        IANA is requested to establish a subregistry, within the same Internet Control
+        Message Protocol (ICMP) Parameters registry group, for Ecolabels and
         Environmentally Relevant Certification (EERC) numbers (C-Type 3), as follows:
       </t>
 
@@ -903,9 +905,12 @@ Trace complete.
         meeting.
       </t>
       <t>
-        Thank you to Shawn Emery for providing very useful feedback and suggestions, and 
-        to William Hawkins III for a thorough review and sharing some fixes, as well as for the 
+        Thank you to Shawn Emery for providing very useful feedback and suggestions, and
+        to William Hawkins III for a thorough review and sharing some fixes, as well as for the
         first implementation of this Internet-Draft, adding environmental information to ICMP messages.
+      </t>
+      <t>
+        We would also like to thank David Dong for his early IANA review and useful feedback.
       </t>
     </section>
   </middle>

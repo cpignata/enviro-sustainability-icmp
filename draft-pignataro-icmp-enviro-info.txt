@@ -5,12 +5,12 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Experimental                                  J. Parikh
-Expires: 18 January 2027                                 Arista Networks
+Expires: 20 January 2027                                 Arista Networks
                                                                R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                            17 July 2026
+                                                            19 July 2026
 
 
              ICMP Extensions for Environmental Information
@@ -47,13 +47,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 January 2027.
+   This Internet-Draft will expire on 20 January 2027.
 
 
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 1]
+Pignataro, et al.        Expires 20 January 2027                [Page 1]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 2]
+Pignataro, et al.        Expires 20 January 2027                [Page 2]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -165,7 +165,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 3]
+Pignataro, et al.        Expires 20 January 2027                [Page 3]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -221,7 +221,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 4]
+Pignataro, et al.        Expires 20 January 2027                [Page 4]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -277,7 +277,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 5]
+Pignataro, et al.        Expires 20 January 2027                [Page 5]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -333,7 +333,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 6]
+Pignataro, et al.        Expires 20 January 2027                [Page 6]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -389,7 +389,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 7]
+Pignataro, et al.        Expires 20 January 2027                [Page 7]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -445,7 +445,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 8]
+Pignataro, et al.        Expires 20 January 2027                [Page 8]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -501,7 +501,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027                [Page 9]
+Pignataro, et al.        Expires 20 January 2027                [Page 9]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -557,7 +557,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027               [Page 10]
+Pignataro, et al.        Expires 20 January 2027               [Page 10]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -613,7 +613,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027               [Page 11]
+Pignataro, et al.        Expires 20 January 2027               [Page 11]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -669,7 +669,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027               [Page 12]
+Pignataro, et al.        Expires 20 January 2027               [Page 12]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -725,7 +725,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027               [Page 13]
+Pignataro, et al.        Expires 20 January 2027               [Page 13]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -781,7 +781,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 18 January 2027               [Page 14]
+Pignataro, et al.        Expires 20 January 2027               [Page 14]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -831,13 +831,13 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
        Table 1: Class-num for Environmental Information Extensions
 
-   IANA is requested to establish a registry for the corresponding class
-   sub-type (C-Type) space, as follows:
+   IANA is requested to establish a subregistry, within the Internet
+   Control Message Protocol (ICMP) Parameters registry group, for the
+   corresponding class sub-type (C-Type) space, as follows:
 
 
 
-
-Pignataro, et al.        Expires 18 January 2027               [Page 15]
+Pignataro, et al.        Expires 20 January 2027               [Page 15]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -868,9 +868,10 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    C-Type values are assignable on a first-come-first-serve (FCFS)
    basis.
 
-   IANA is requested to establish a sub-registry for Ecolabels and
-   Environmentally Relevant Certification (EERC) numbers (C-Type 3), as
-   follows:
+   IANA is requested to establish a subregistry, within the same
+   Internet Control Message Protocol (ICMP) Parameters registry group,
+   for Ecolabels and Environmentally Relevant Certification (EERC)
+   numbers (C-Type 3), as follows:
 
       +=============+==============================+===============+
       | Number      | Name                         | Reference     |
@@ -892,8 +893,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-
-Pignataro, et al.        Expires 18 January 2027               [Page 16]
+Pignataro, et al.        Expires 20 January 2027               [Page 16]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -912,6 +912,9 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    suggestions, and to William Hawkins III for a thorough review and
    sharing some fixes, as well as for the first implementation of this
    Internet-Draft, adding environmental information to ICMP messages.
+
+   We would also like to thank David Dong for his early IANA review and
+   useful feedback.
 
 12.  References
 
@@ -943,16 +946,17 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               3: CSMA/CD Access Method and Physical Layer Specifications
               Amendment 5: Media Access Control Parameters, Physical
               Layers, and Management Parameters for Energy-Efficient
-              Ethernet", IEEE Std 802.3az-2010 (Amendment to IEEE Std
-              802.3-2008), 27 October 2010,
-              <https://standards.ieee.org/ieee/802.3az/4270/>.
 
 
 
-Pignataro, et al.        Expires 18 January 2027               [Page 17]
+Pignataro, et al.        Expires 20 January 2027               [Page 17]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
+
+              Ethernet", IEEE Std 802.3az-2010 (Amendment to IEEE Std
+              802.3-2008), 27 October 2010,
+              <https://standards.ieee.org/ieee/802.3az/4270/>.
 
    [EERC-ISO14001_2015]
               "ISO 14001:2015 Environmental management systems.
@@ -994,21 +998,23 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
               DOI 10.17487/RFC4122, July 2005,
               <https://www.rfc-editor.org/info/rfc4122>.
 
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 20 January 2027               [Page 18]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
+
    [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
               Control Message Protocol (ICMPv6) for the Internet
               Protocol Version 6 (IPv6) Specification", STD 89,
               RFC 4443, DOI 10.17487/RFC4443, March 2006,
               <https://www.rfc-editor.org/info/rfc4443>.
-
-
-
-
-
-
-Pignataro, et al.        Expires 18 January 2027               [Page 18]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
 
    [RFC5927]  Gont, F., "ICMP Attacks against TCP", RFC 5927,
               DOI 10.17487/RFC5927, July 2010,
@@ -1055,10 +1061,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-Pignataro, et al.        Expires 18 January 2027               [Page 19]
+Pignataro, et al.        Expires 20 January 2027               [Page 19]
