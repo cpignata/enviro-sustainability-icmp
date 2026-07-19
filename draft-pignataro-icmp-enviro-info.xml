@@ -718,7 +718,7 @@ Trace complete.
             <ul>
               <li>
                 Receiver (receiver.py) — waits for incoming data. Requires two arguments: (0 or 1) <br />
-                --probeFlag: Tells the receiver to include the Interface Identification Object <xref target="RFC8335" /> in the response or not <br />
+                --interfaceIdentifyFlag: Tells the receiver to include the Interface Identification Object <xref target="RFC8335" /> in the response or not <br />
                 --greenFlag: Tells the receiver to include the Environmental Information Object (this document) in the response or not
               </li>
               <li>

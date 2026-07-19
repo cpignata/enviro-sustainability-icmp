@@ -732,8 +732,9 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
        *  Receiver (receiver.py) — waits for incoming data.  Requires
           two arguments: (0 or 1)
-          --probeFlag: Tells the receiver to include the Interface
-          Identification Object [RFC8335] in the response or not
+          --interfaceIdentifyFlag: Tells the receiver to include the
+          Interface Identification Object [RFC8335] in the response or
+          not
           --greenFlag: Tells the receiver to include the Environmental
           Information Object (this document) in the response or not
 
@@ -777,7 +778,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    transportation of the environmental information to a single
    administrative domain (AD).  But, based on [RFC8799], limiting a
    protocol's functionality doesn't mean that it will be secure.  So,
-   this particular document, which defines "a modified ICMP message with
 
 
 
@@ -786,6 +786,7 @@ Pignataro, et al.        Expires 20 January 2027               [Page 14]
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
+   this particular document, which defines "a modified ICMP message with
    environmental information", can be classified as a FAIL-OPEN protocol
    [I-D.wkumari-intarea-safe-limited-domains].  That is, the interfaces
    of administrative domain border nodes, facing towards the open
@@ -833,7 +834,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    IANA is requested to assign the following object Class-num in the
    ICMP Extension Object Classes and Class Sub-types registry
    [IANA-ICMP-Extended]:
-
 
 
 
