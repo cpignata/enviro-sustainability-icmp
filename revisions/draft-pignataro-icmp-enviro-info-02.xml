@@ -12,13 +12,14 @@
 <!ENTITY RFC.8335 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8335.xml">
 <!ENTITY RFC.8799 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8799.xml">
 <!ENTITY RFC.4122 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4122.xml">
+<!ENTITY RFC.9547 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9547.xml">
 <!ENTITY I-D.wkumari-intarea-safe-limited-domains SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-wkumari-intarea-safe-limited-domains-00.xml">
 ]>
 <?rfc toc="yes"?>
 <?rfc rfcedstyle="yes"?>
 <?rfc subcompact="no" ?>
 <?rfc symrefs="yes"?>
-<rfc category="exp" docName="draft-pignataro-eimpact-icmp-04" ipr="trust200902" submissionType="IETF">
+<rfc category="exp" docName="draft-pignataro-icmp-enviro-info-02" ipr="trust200902" submissionType="IETF">
   <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
   <?rfc toc="yes" ?>
   <?rfc compact="yes" ?>
@@ -28,7 +29,7 @@
   <?rfc strict="yes" ?>
 
   <front>
-    <title abbrev="ICMP E-Impact Extensions">ICMP Extensions for Environmental Information</title>
+    <title abbrev="ICMP Enviro Info Extensions">ICMP Extensions for Environmental Information</title>
 
     <author fullname="Carlos Pignataro" initials="C." surname="Pignataro">
       <organization abbrev="NC State University">North Carolina State University</organization>
@@ -42,13 +43,15 @@
     </author>
 
     <author fullname="Jainam Parikh" initials="J." surname="Parikh">
-      <organization abbrev="NC State University">North Carolina State University</organization>
+     <organization abbrev="Arista Networks">Arista Networks</organization>
       <address>
         <postal>
+          <street>5453 Great America Parkway</street>
+          <city>Santa Clara</city>
+          <code>95035</code>
           <country>US</country>
-        </postal>        
+        </postal>
         <email>jainam@parikhgroup.net</email>
-        <email>jparikh@ncsu.edu</email>
       </address>
     </author>
 
@@ -78,16 +81,17 @@
       <t>
         This document defines a data structure that can be appended to selected
         ICMP messages. The ICMP extension defined herein can be used to
-        gain visibility on environmental sustainability information on the Internet by 
+        gain visibility on environmental information on the internet by 
         providing per-hop (i.e., per topological network node) power metrics
-        and other current or future sustainability metrics. This will contribute 
-        to achieving an objective mentioned in the IAB E-Impact workshop.
+        and other present or future metrics around environmental information.
+        This will contribute to achieving an objective mentioned in the IAB E-Impact 
+        workshop <xref target="RFC9547" />.
       </t>
       <t>
         The techniques presented are useful not only in a transactional setting 
         (e.g., a user-issued traceroute or a ping request), but also in a scheduled 
         automated setting where they may be run periodically in a mesh across an 
-        administrative domain to map out environmental sustainability metrics.
+        administrative domain to map out environmental information.
       </t>
     </abstract>
   </front>
@@ -104,15 +108,27 @@
         messages to detect and diagnose network issues.
       </t>
       <t>
-        As the world transitions towards sustainability in technology, the focus 
-        is shifting not only on creating modern technologies infused with
-        environmental sustainability but also on bridging gaps in the tools 
-        that are already available, to enhance visibility, measurement, and 
+        As the world transitions towards environmental sustainability in technology,
+        and to use metrics to make networks more efficient, both from the environmental
+        and technological standpoint, the focus is shifting not only on creating modern 
+        technologies infused with environmental information but also on bridging gaps 
+        in the tools that are already available, to enhance visibility, measurement, and 
         quantification of their environmental impact. Consequently, tools which 
         have been foundational for control and management for decades now encounter 
         new requirements including enhancing them to cater to a significantly 
         increasing demand for monitoring the sustainability and environmental 
-        impact. This document serves that need by defining an ICMP extension 
+        impact.
+      </t>
+      <t>
+        The IAB had held a workshop on "Environmental Impact of Internet 
+        Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, 
+        in which the need for visibility into environmental sustainability 
+        information within traditional Internet tools such as traceroute was 
+        highlighted (see WebVTT cue identifiers 139 and 140 of
+        <xref target="IAB-EIMPACTWS-Minutes" />.)
+      </t>
+      <t>
+        This document serves that need by defining an ICMP extension 
         object that appends environmental sustainability information to 
         ICMP messages. Using ICMP as a medium to deliver environmental 
         sustainability information is very apt as ICMP is one of the most used
@@ -122,7 +138,7 @@
       </t>
       <t>
         Using the extension defined herein, a device can explicitly append
-        these environmental sustainability metrics for transmission across an 
+        these environmental sustainability information for transmission across an 
         administrative domain:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
@@ -133,7 +149,7 @@
         <?rfc subcompact="no" ?>
       </t>
       <t>
-        Additional environmental sustainability metrics, such as the following, for 
+        Additional environmental sustainability information, such as the following, for 
         example, may also be specified in the future:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
@@ -177,27 +193,61 @@
     </section>
 
     <section title="Motivation" anchor="motivation">
+      <t>
+        Motivations behind this proposing the extension defined here in this document are:
+        <list style="hanging">
+          <t hangText="(1) Native Telemetry Data Availability"></t>
+          <t hangText="">
+            Networking chips and devices increasingly measure and expose environmental
+            information such as power draw, energy use, thermal data, and other pieces of 
+            metrics/information. Telemetry data has proven to be very important in making
+            large scale network deployments efficient from the perspective of power consumption, 
+            cooling etc.
+          </t>
+          <t hangText="(2) Ubiquitous Operational Use"></t>
+          <t hangText="">
+            Classic diagnostic tools such as ping and traceroute remain the most widely used
+            and universally available command-line utilities for network troubleshooting,
+            commonly serving as the first step in connectivity and reachability diagnosis. Thus,
+            building extensions on top of these tools, could prove to be relatively easy to
+            adapt and implement.
+          </t>
+          <t hangText="(3) Standardization at the Lowest Common Mechanism"></t>
+          <t hangText="">
+            We are making use of an already mature, extensible, and widely implemented foundation:
+            RFC 4884 (Extended ICMP for Multi-Part Messages) <xref target="RFC4884" />
+          </t>
+        </list>
+      </t>
+
+      <section title="Why is ICMP suitable?">
         <t>
-          The IAB held a workshop on "Environmental Impact of Internet 
-          Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, 
-          in which the need for visibility into environmental sustainability 
-          metrics within traditional Internet tools such as traceroute was 
-          highlighted (see WebVTT cue identifiers 139 and 140 of 
-          <xref target="IAB-EIMPACTWS-Minutes" />.)
+          Environmental data already exists in inventories, the novelty is 
+          surfacing it along the path of live connectivity probes (e.g., ping,
+          traceroute, PROBE  <xref target="RFC8335" />) for real-time, per-hop context.
         </t>
         <t>
-          The Environmental Information ICMP Extensions defined in this document 
-          allow for augmenting the traceroute output with environmental metrics 
-          from each reported node.
+          ICMP is universally implemented, stateless, and tool-agnostic enabling
+          lightweight environmental telemetry without new protocols, APIs, or credentials.
         </t>
+        <t>
+          This facilitates path-level mapping of sustainability metrics, comparable to 
+          latency or loss, across heterogeneous equipment and administrative domains.
+        </t>
+        <t>
+          Using ICMP as a “host” for carrying environmental information makes this retrieval
+          method compatible with other approaches. It also complements, rather than replaces,
+          existing methods.
+        </t>
+      </section>
     </section>
 
-    <section title="Transport Options for Sustainability Information">
+    <section title="Transport Options for Environmental Information">
       <t>
-        To achieve the goal of transporting useful sustainability information 
+        To achieve the goal of transporting useful environmental information 
         across the network, there are two key considerations. First, what 
         information is useful to convey and in what format, and second, how 
-        to transport that sustainability information.
+        to transport that environmental information.
       </t>
       <t>
         For the first task, it is critical to normalize and agree upon the 
@@ -208,9 +258,9 @@
         For the second task, there is a variety of options available depending 
         on use cases. These can be categorized based on whether the approach is 
         distributed (i.e., any endpoint or node can request and/or receive the 
-        sustainability information) or centralized (i.e., a single 'controller' 
+        environmental information) or centralized (i.e., a single 'controller' 
         compiles and consolidates the information.) They can also be categorized 
-        based on the networking layer used (e.g., IP, like ICMP, or application, 
+        based on the networking layer used (e.g., IP, like ICMP, or applications, 
         like SNMP). Further, an existing protocol can be extended, or a brand 
         new protocol can potentially be created for this purpose.
       </t>
@@ -218,7 +268,7 @@
         This document builds upon a standardized, modular,
         backwards-compatible, and scale-proven ICMP extension 
         <xref target="RFC4884" />. This does not preclude the
-        definition of other methods to transport sustainability information, 
+        definition of other methods to transport environmental information, 
         more fitting to other use-cases.
       </t>
     </section>
@@ -273,9 +323,9 @@
         <t>
           The ICMP Environmental Information Extension has the following format.
         </t>
-        <figure anchor="format-fig" align="center"
+        <figure anchor="format-fig" align="left"
                 title="ICMP Environmental Information Extension Format">
-          <artwork xml:space="preserve">
+          <artwork xml:space="preserve" align="left">
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
@@ -309,11 +359,12 @@
             <t hangText="">
               <list style="hanging">
                 <t hangText="Length:">
-                  <br />Length of the object, including header and payload, 
-                  in octets. If there is no payload, the value of Length is 4.
+                  <br />Length of the Environmental Information object, 
+                  including object header and object payload, 
+                  in octets. If there is no object payload, the value of Length is 4.
                   This is used to convey that the object is unavailable (e.g.,
                   because the requested information is not applicable for the
-                  type of component that is being queried).
+                  type of component that is being queried.)
                 </t>
                 <t hangText="Class-Num:">
                   <br />TBA (Environmental Information)
@@ -341,14 +392,14 @@
           The 8-bit C-Type defined in the Section 8 of <xref target="RFC4884" /> 
           allows to carry different information elements within this Class-Num 
           (TBA). The techniques herein defined can be used with any specific 
-          environmental sustainability metric in use, current or future.
+          environmental sustainability metric in use, present or future.
         </t>
 
-        <figure anchor="ctype-fig" align="center"
+        <figure anchor="ctype-fig" align="left"
                 title="Environmental Information Extension Object Header">
                 <preamble>The ICMP Environmental Information Extension Object header 
                 has the following format:</preamble>
-          <artwork xml:space="preserve">
+          <artwork xml:space="preserve" align="left">
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -363,8 +414,8 @@
           <t>
             Node Power Draw Sub-Object
             <figure anchor="ctype-1" 
-                    title="Node Power Draw Sub-Object">
-              <artwork xml:space="preserve" >
+                    title="Node Power Draw Sub-Object" align="left">
+              <artwork xml:space="preserve" align="left">
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -376,7 +427,7 @@
             </figure>
             A Class-Num of TBA and a C-Type of 1 are specified.  
             <vspace blankLines="1" />
-            The Length is 8 if the object contains this payload.
+            The Length is 12 if the object contains this payload.
             A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
             The Present Power is the node-level power being presently drawn, 
@@ -396,20 +447,25 @@
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|              Throughput (32-bit unsigned word)                |
+|             Throughput (32-bit unsigned word 1)               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Throughput (32-bit unsigned word 2)               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
               </artwork>
             </figure>
             A Class-Num of TBA and a C-Type of 2 are specified.  
             <vspace blankLines="1" />
-            The Length is 8 if the object contains this payload.
+            The Length is 12 if the object contains this payload.
             A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
-            The returned value is the node-level current throughput, 
+            The returned value is the node-level present throughput, 
             which is a magnitude that may be directly displayed, and 
-            is expressed in bits-per-second (BPS). This allows the 
+            is expressed in bits-per-second (bps). This allows the 
             recipient of the ICMP message to determine a relationship 
             between power and traffic load.
+            <vspace blankLines="1" />
+            There's an in-depth discussion on why we have chosen a 
+            64-bit object type in <xref target="subobject-formats" />.
           </t>
 
           <t>
@@ -447,7 +503,7 @@
           <t>
             Component-level Power Draw Sub-Object
             <figure anchor="ctype-4" 
-                    title="Component-level Power Draw Element">
+                    title="Component-level Power Draw Sub-Object">
               <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -468,7 +524,7 @@
             </figure>
             A Class-Num of TBA and a C-Type of 4 are specified.  
             <vspace blankLines="1" />
-            The Length is 4 plus 20 times the number of 
+            The Length is 4 plus 24 times the number of 
             elements included. A Length value of 4 indicates that
             this object is unavailable.
             <vspace blankLines="1" />
@@ -487,7 +543,7 @@
           <t>
             Component-level Throughput Sub-Object
             <figure anchor="ctype-5" 
-                    title="Component-level Throughput Element">
+                    title="Component-level Throughput Sub-Object">
               <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -500,23 +556,28 @@
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                      UUID 32-bit Word 4                       |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|              Component Throughput (32-bit word)               |
+|             Component Throughput (32-bit word 1)              |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Component Throughput (32-bit word 2)              |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
               </artwork>
             </figure>
             A Class-Num of TBA and a C-Type of 5 are specified.  
             <vspace blankLines="1" />
-            The Length is 4 plus 20 times the number of 
+            The Length is 4 plus 24 times the number of 
             elements included. A Length value of 4 indicates that
             this object is unavailable.
             <vspace blankLines="1" />
             The returned value is one or more instances of component-level 
-            throughput. Each instance is a set comprised
-            by a UUID uniquely identifying the component, and the actual
-            throughput of said component in bits-per-second (BPS).
-            This allows the recipient of the ICMP message to determine a
-            relationship between power and traffic load.
-          </t>          
+            throughput. Each instance is a set comprised by a UUID uniquely 
+            identifying the component, and the actual throughput of said 
+            component in bits-per-second (bps). This allows the recipient 
+            of the ICMP message to determine a relationship between power 
+            and traffic load.
+            <vspace blankLines="1" />
+            There's an in-depth discussion on why we have chosen a 
+            64-bit object type in <xref target="subobject-formats" />.
+          </t>
         </list>
 
 <!--
@@ -557,19 +618,44 @@
       </section>
     </section>
 
+    <section anchor="subobject-formats" title="Sub-Object Formats">
+      <t>
+        As discussed in <xref target="ctype" />, we have chosen 64-bit
+        sub-objects to accommodate the present trends of the industry 
+        with respect to high density ports/components and nodes. Organizations
+        now have components/interfaces/line cards with 100/400/800Gbps
+        throughput and nodes with a combined throughput exceeding
+        10Tbps. This cannot be represented in a field which is only 32-bit long. 
+        A 32-bit field can only represent a max throughput of 4Gbps (2 ^ 32 bps).
+        To address this, we define a "wider" 64-bit Sub-Object
+        format.
+      </t>
+      
+      <t>
+        We could have defined both the "wide" (64-bit) and "short" (32-bit)
+        variants and leave it up to the device (node) to choose one over the other
+        based on the size requirements of the data; this could make the final packet
+        space efficient, but it would be harder to implement, as a node would have to
+        make an extra check to decide what kind to choose from (wide or short).
+        Hence, for the ease of implementation, we have decided to just define a 64-bit
+        sub-object where we need one, and skip defining a 32-bit sub-object for information
+        like throughput, etc.
+      </t>
+    </section>
+
     <section title="Sample Use Case">
       <t>
-        The ICMP extension defined in this memo can be used to get sustainability 
-        metrics, either via a "transactional" or a "scheduled automated" fashion, 
+        The ICMP extension defined in this memo can be used to get environmental 
+        information, either via a "transactional" or a "scheduled automated" fashion, 
         inside an administrative domain. This section presents a sample 
-        "transactional" use case of how these metrics could be displayed to a user. 
-        Since both traceroute and ping utilities are based on ICMP, we will use 
+        "transactional" use case of how these pieces of information could be displayed
+        to a user. Since both traceroute and ping utilities are based on ICMP, we will use 
         traceroute as an example.
       </t>
       <t>  
         The flavor of traceroute that has been shown here supports the ICMP 
-        extensions and is capable of conveying to the end user the sustainability 
-        metrics in the extensions, along with the nodes that the original datagram 
+        extensions and is capable of conveying to the end user the environmental 
+        information in the extensions, along with the nodes that the original datagram 
         visited on its way to the destination. This traceroute is also 
         backwards-compatible, i.e., it can also work well with those nodes which 
         do not support these ICMP extensions.
@@ -577,8 +663,8 @@
       <t>
         A user at a host with an IP address 198.51.100.27 executes a traceroute to 
         192.0.2.1 and the <xref target="use-case-1" /> shows how the user can be 
-        presented with these metrics:
-        <figure anchor="use-case-1" title="Sustainability-Metrics Infused Traceroute">
+        presented with these different pieces of information:
+        <figure anchor="use-case-1" title="Environmental-Information Infused Traceroute" align="left">
           <artwork xml:space="preserve" >
 > traceroute 192.0.2.1
 Tracing route to 192.0.2.1 over a maximum of 30 hops
@@ -614,6 +700,35 @@ Trace complete.
       </t>
     </section>
 
+
+    <section title="Implementation Status">
+      <t>
+        There is interest in the 'green networking community' to have a lightweight mechanism to 
+        provide environmental sustainability information. We are aware of a couple of implementations.
+        <list style="numbers">
+          <t>William Hawkins III, from the University of Cincinnati, has led an implementation called "greenmatter", 
+            found at <eref target="https://github.com/cerfcast/greenmatter" />, that responds to ICMP Extended Echo 
+            Messages with Environmental Information.
+          </t>
+          <t>A second implementation, which is a Python-based sender and a receiver, led by Jainam Parikh, found at 
+            <eref target="https://github.com/jmparikh/green-extension-poc" />, that responds to ICMP Extended Echo 
+            Messages with Environmental Information, with an Extended Echo Reply.
+            <ul>
+              <li>
+                Receiver (receiver.py) — waits for incoming data. Requires two arguments: (0 or 1) <br />
+                --probeFlag: Tells the receiver to include the Interface Identification Object <xref target="RFC8335" /> in the response or not <br />
+                --greenFlag: Tells the receiver to include the Environmental Information Object (this document) in the response or not
+              </li>
+              <li>
+                Sender (sender.py) — connects to the receiver and sends data. Simply sends an ICMP Extended Echo Request to the receiver.py
+              </li>
+            </ul>
+          </t>
+        </list>
+      </t>
+    </section>
+
+
     <section title="Security Considerations">
       <t>
         The security considerations of <xref target="RFC4884" /> and of 
@@ -633,8 +748,9 @@ Trace complete.
       </t>
       <t>
         The extensions defined in this document allows a router to append 
-        environmental sustainability information to multi-part ICMP messages, and therefore can provide the user of the 
-        traceroute and ping applications with additional metrics.  
+        environmental sustainability information to multi-part ICMP messages, 
+        and therefore can provide the user of the traceroute and ping applications
+        with additional information.  
       </t>
       <t>
         The intended field of use for the extensions defined in this document
@@ -644,53 +760,48 @@ Trace complete.
         uses.
       </t>
       <t>
-        Some of the additional metrics provided, as e.g., power draw information, 
+        Some of the additional information provided, as e.g., power draw information, 
         have privacy considerations. For example, behavioral considerations of the 
         devices, or estimating other node and network attributes from the power or 
         energy data. Other things like identification of the node, deducing node 
         usage patterns are some more privacy concerns that can be related to the 
-        metrics.
+        information.
       </t>
       <t>
         Keeping these considerations in mind, we limited the scope of the 
-        transportation of the sustainability metrics to a single administrative 
-        domain (AD). But, based on <xref target="RFC8799" />, limiting a protocols 
+        transportation of the environmental information to a single administrative 
+        domain (AD). But, based on <xref target="RFC8799" />, limiting a protocol's 
         functionality doesn't mean that it will be secure. So, this particular 
-        document, which defines "a modified ICMP message with sustainability 
-        metrics", can be classified as a FAIL-OPEN protocol 
+        document, which defines "a modified ICMP message with environmental 
+        information", can be classified as a FAIL-OPEN protocol 
         <xref target="I-D.wkumari-intarea-safe-limited-domains" />. That is, 
         the interfaces of administrative domain border nodes, facing towards 
         the open internet, can be configured such that they avoid leaking 
-        messages with extensions containing sustainability metrics, out of the 
+        messages with extensions containing environmental information, out of the 
         AD. To allow general ICMP messages, an administrator can configure those 
         outward facing interfaces to not block/drop the entire message but only 
         strip off the extension objects and only forward the ICMP message if it 
         is destined to go out of the AD.
       </t>
       <t>
-        When metrics are limited to the same AD, it can be considered that they 
-        can be generated from a valid source and will have integrity.
+        When environmental information are limited to the same AD, it can be considered 
+        that they can be generated from a valid source and will have integrity.
       </t>
       <t>
-        High-fidelity reporting of power draw for the targeted node's memory, cache, hardware security module, or other sensitive component could allow an attacker to perform a remote side-channel attack (i.e., using differential power analysis) during cryptographic operations.  This attack would allow the adversary to extract the network node's secret key(s) or other sensitive data.  There are a couple of ways of mitigating this type of attack; exclude power metrics for components that process sensitive data or provide countermeasures that introduce noise in the reported power metrics (e.g., software that demarcates sensitive data which signals the processing hardware to treat this data with algorithmic noise).  The latter technique is an area of ongoing research at the time of this writing.
+        High-fidelity reporting of power draw for the targeted node's memory, cache, hardware 
+        security module, or other sensitive component could allow an attacker to perform a 
+        remote side-channel attack (i.e., using differential power analysis) during cryptographic 
+        operations. This attack would allow the adversary to extract the network node's secret key(s) 
+        or other sensitive data.  There are a couple of ways of mitigating this type of attack; 
+        exclude power metrics for components that process sensitive data or provide countermeasures
+        that introduce noise in the reported power metrics (e.g., software that demarcates sensitive data 
+        which signals the processing hardware to treat this data with algorithmic noise).
+        The latter technique is an area of ongoing research at the time of this writing.
       </t>
       <t>
         Finally, this document does not specify an authentication mechanism for the
         extension that it defines.  Application developers should be aware
         of various ICMP attacks <xref target="RFC5927" />.
-      </t>
-    </section>
-
-    <section title="Limitations">
-      <t>
-        Section 7 of <xref target="RFC4884" /> defines the ICMP Extension Structure. 
-        As per RFC 4884, the Extension Structure contains exactly one Extension
-        Header followed by one or more objects.  When applied to the ICMP Extended 
-        Echo Request message, the ICMP Extension Structure MUST contain exactly 
-        one instance of the Interface Identification Object (Section 2.1 of 
-        <xref target="RFC8335" />). So, due to the limitation of not being able to
-        append more than one extension object to an Extended Echo, the extension 
-        objects defined herein cannot be appended to an Extended Echo Message.
       </t>
     </section>
 
@@ -750,8 +861,8 @@ Trace complete.
       </t>
 
       <t>
-        IANA is requested to establish a registry for Ecolabels and 
-        Environmentally Relevant Certification (EERC) numbers (C-Type 2), as follows:
+        IANA is requested to establish a sub-registry for Ecolabels and 
+        Environmentally Relevant Certification (EERC) numbers (C-Type 3), as follows:
       </t>
 
         <texttable title="EERC numbers" suppress-title="true">
@@ -779,19 +890,22 @@ Trace complete.
         </texttable>
 
       <t>
-        EERC numbers are assignable on a first-come-first-serve (FCFS) basis, and require a citation to the definition of the certification.
+        EERC numbers are assignable on a first-come-first-serve (FCFS) basis, and require a 
+        citation to the definition of the certification.
       </t>
     </section>
 
     <section title="Acknowledgements">
       <t>
-        We are very grateful to Jari Arkko for his thorough review and most 
+        We are very grateful to Jari Arkko for his support, thorough review, and a 
         useful set of comments and suggestions. We are also appreciative of the 
         feedback, input, and interest from participants of the eimpact 2024 Interim 
         meeting.
       </t>
       <t>
-        Shawn Emery provided very useful feedback and suggestions.
+        Thank you to Shawn Emery for providing very useful feedback and suggestions, and 
+        to William Hawkins III for a thorough review and sharing some fixes, as well as for the 
+        first implementation of this Internet-Draft, adding environmental information to ICMP messages.
       </t>
     </section>
   </middle>
@@ -803,7 +917,7 @@ Trace complete.
       &RFC.4884;
       &RFC.8174;
       &RFC.8335;
-
+            
     </references>
     
     <references title="Informative References">
@@ -813,6 +927,7 @@ Trace complete.
       &RFC.0792;
       &RFC.4443;
       &RFC.8799;
+      &RFC.9547;
       &I-D.wkumari-intarea-safe-limited-domains;
 
       <reference anchor="IAB-EIMPACTWS" target="https://datatracker.ietf.org/group/eimpactws/">
