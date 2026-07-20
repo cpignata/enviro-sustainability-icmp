@@ -734,7 +734,9 @@ Trace complete.
                 demonstrates repurposing the unused value 7 of the Extended
                 Echo Reply "State" field <xref target="RFC8335" /> to signal
                 that the reply carries only the Environmental Information
-                Object, without an Interface Identification Object. This is
+                Object, without an Interface Identification Object. The
+                unused "Res" field <xref target="RFC8335" /> is also being
+                considered for this same purpose. This is
                 not currently part of this specification; see
                 <xref target="limitations" />.
               </li>
@@ -862,11 +864,7 @@ Trace complete.
         experimented with working around this limitation by repurposing an
         unused value of the Extended Echo Reply "State" field to signal that
         the reply carries only the Environmental Information Object, without
-        an Interface Identification Object. This is not currently
-        standardized: it is not defined by <xref target="RFC8335" />, is not
-        specified by this document, and would require separate specification
-        work (including IANA allocation of the "State" value used) before it
-        could be relied upon.
+        an Interface Identification Object.
       </t>
     </section>
 

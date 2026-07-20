@@ -745,8 +745,10 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
           demonstrates repurposing the unused value 7 of the Extended
           Echo Reply "State" field [RFC8335] to signal that the reply
           carries only the Environmental Information Object, without an
-          Interface Identification Object.  This is not currently part
-          of this specification; see Section 10.
+          Interface Identification Object.  The unused "Res" field
+          [RFC8335] is also being considered for this same purpose.
+          This is not currently part of this specification; see
+          Section 10.
 
 9.  Security Considerations
 
@@ -773,8 +775,6 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    facilities.  The extensions herein defined supply additional
    information in ICMP responses.  These mechanisms are not initially
    intended for other uses.
-
-
 
 
 
@@ -879,17 +879,17 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    experimented with working around this limitation by repurposing an
    unused value of the Extended Echo Reply "State" field to signal that
    the reply carries only the Environmental Information Object, without
-   an Interface Identification Object.  This is not currently
-   standardized: it is not defined by [RFC8335], is not specified by
-   this document, and would require separate specification work
-   (including IANA allocation of the "State" value used) before it could
-   be relied upon.
+   an Interface Identification Object.
 
 11.  IANA Considerations
 
    IANA is requested to assign the following object Class-num in the
    ICMP Extension Object Classes and Class Sub-types registry
    [IANA-ICMP-Extended]:
+
+
+
+
 
 
 
