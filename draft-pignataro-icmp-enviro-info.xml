@@ -11,9 +11,9 @@
 <!ENTITY RFC.8174 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC.8335 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8335.xml">
 <!ENTITY RFC.8799 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8799.xml">
-<!ENTITY RFC.4122 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4122.xml">
+<!ENTITY RFC.9562 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9562.xml">
 <!ENTITY RFC.9547 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9547.xml">
-<!ENTITY I-D.wkumari-intarea-safe-limited-domains SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-wkumari-intarea-safe-limited-domains-00.xml">
+<!ENTITY I-D.wkumari-intarea-safe-limited-domains SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-wkumari-intarea-safe-limited-domains-06.xml">
 <!ENTITY I-D.ietf-intarea-rfc8335bis SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-intarea-rfc8335bis-04.xml">
 <!ENTITY I-D.ietf-6man-icmpv6-reflection SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-6man-icmpv6-reflection-19.xml">
 ]>
@@ -83,11 +83,11 @@
       <t>
         This document defines a data structure that can be appended to selected
         ICMP messages. The ICMP extension defined herein can be used to
-        gain visibility on environmental information on the internet by 
+        gain visibility into environmental information on the internet by
         providing per-hop (i.e., per topological network node) power metrics
         and other present or future metrics around environmental information.
-        This will contribute to achieving an objective mentioned in the IAB E-Impact 
-        workshop <xref target="RFC9547" />.
+        This will contribute to achieving an objective mentioned in the report
+        of the IAB E-Impact workshop.
       </t>
       <t>
         The techniques presented are useful not only in a transactional setting 
@@ -101,8 +101,8 @@
   <middle>
     <section anchor="intro" title="Introduction">
       <t>
-        IP devices use the Internet Control Message Protocol ICMPv4
-        <xref target="RFC0792" /> and ICMPv6 <xref target="RFC4443" /> to
+        IP devices use ICMPv4 <xref target="RFC0792" /> and ICMPv6
+        <xref target="RFC4443" /> to
         convey control information to source hosts. In particular, when
         an IP device receives a datagram that it cannot process, it may
         send an ICMP message to the datagram's originator or source.
@@ -122,12 +122,13 @@
         impact.
       </t>
       <t>
-        The IAB had held a workshop on "Environmental Impact of Internet 
-        Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, 
-        in which the need for visibility into environmental sustainability 
-        information within traditional Internet tools such as traceroute was 
-        highlighted (see WebVTT cue identifiers 139 and 140 of
-        <xref target="IAB-EIMPACTWS-Minutes" />.)
+        The IAB had held a workshop on
+        "Environmental Impact of Internet Applications and Systems (eimpactws)"
+        <xref target="IAB-EIMPACTWS" />, in which the need for visibility into
+        environmental sustainability information within traditional Internet
+        tools such as traceroute was highlighted (see WebVTT cue identifiers
+        139 and 140 of <xref target="IAB-EIMPACTWS-Minutes" />), as later
+        reported in <xref target="RFC9547" />.
       </t>
       <t>
         This document serves that need by defining an ICMP extension 
@@ -140,13 +141,13 @@
       </t>
       <t>
         Using the extension defined herein, a device can explicitly append
-        these environmental sustainability information for transmission across an 
+        this environmental sustainability information for transmission across an
         administrative domain:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
           <t>Present and idle power (node level, component level)</t>
           <t>Throughput (node level, component level)</t>
-          <t>Ecolabels and Environmentally Relevant Certifications (EERCs)</t>
+          <t>Ecolabels and Environmentally Relevant Certification (EERC)</t>
         </list>
         <?rfc subcompact="no" ?>
       </t>
@@ -196,7 +197,7 @@
 
     <section title="Motivation" anchor="motivation">
       <t>
-        Motivations behind this proposing the extension defined here in this document are:
+        The motivations behind proposing the extension defined in this document are:
         <list style="hanging">
           <t hangText="(1) Native Telemetry Data Availability"></t>
           <t hangText="">
@@ -217,16 +218,17 @@
           <t hangText="(3) Standardization at the Lowest Common Mechanism"></t>
           <t hangText="">
             We are making use of an already mature, extensible, and widely implemented foundation:
-            RFC 4884 (Extended ICMP for Multi-Part Messages) <xref target="RFC4884" />
+            RFC 4884 (Extended ICMP to Support Multi-Part Messages) <xref target="RFC4884" />
           </t>
         </list>
       </t>
 
       <section title="Why is ICMP suitable?">
         <t>
-          Environmental data already exists in inventories, the novelty is 
+          Environmental data already exists in inventories; the novelty is
           surfacing it along the path of live connectivity probes (e.g., ping,
-          traceroute, PROBE  <xref target="RFC8335" />) for real-time, per-hop context.
+          traceroute, or PROBE, the Extended ICMP Echo mechanism defined in
+          <xref target="RFC8335" />) for real-time, per-hop context.
         </t>
         <t>
           ICMP is universally implemented, stateless, and tool-agnostic enabling
@@ -237,7 +239,7 @@
           latency or loss, across heterogeneous equipment and administrative domains.
         </t>
         <t>
-          Using ICMP as a “host” for carrying environmental information makes this retrieval
+          Using ICMP as a "host" for carrying environmental information makes this retrieval
           method compatible with other approaches. It also complements, rather than replaces,
           existing methods.
         </t>
@@ -468,7 +470,7 @@
             recipient of the ICMP message to determine a relationship 
             between power and traffic load.
             <vspace blankLines="1" />
-            There's an in-depth discussion on why we have chosen a 
+            There is an in-depth discussion on why we have chosen a 
             64-bit object type in <xref target="subobject-formats" />.
           </t>
 
@@ -496,7 +498,7 @@
             The following EERC numbers are defined by the present 
             specification:
             <list style="numbers">
-              <t>ISO 14001:2015 <xref target="EERC-ISO14001:2015" /></t>
+              <t>ISO 14001:2015 <xref target="EERC-ISO14001-2015" /></t>
               <t>TCO Certified <xref target="EERC-TCO" /></t>
               <t>Energy-efficient ethernet <xref target="EERC-EEE" /></t>
             </list>
@@ -534,7 +536,8 @@
             <vspace blankLines="1" />
             The returned value is one or more instances of component-level 
             power drawn metrics. Each instance is a set comprised by a 
-            UUID <xref target="RFC4122" /> uniquely identifying the component, and
+            Universally Unique Identifier (UUID) <xref target="RFC9562" />
+            uniquely identifying the component, and
             the Present Component Power and Idle Component Power fields.
             The Present Component Power is the component-level power being
             presently drawn, which is a magnitude that may be directly displayed,
@@ -579,7 +582,7 @@
             of the ICMP message to determine a relationship between power 
             and traffic load.
             <vspace blankLines="1" />
-            There's an in-depth discussion on why we have chosen a 
+            There is an in-depth discussion on why we have chosen a 
             64-bit object type in <xref target="subobject-formats" />.
           </t>
         </list>
@@ -625,12 +628,12 @@
     <section anchor="subobject-formats" title="Sub-Object Formats">
       <t>
         As discussed in <xref target="ctype" />, we have chosen 64-bit
-        sub-objects to accommodate the present trends of the industry 
-        with respect to high density ports/components and nodes. Organizations
-        now have components/interfaces/line cards with 100/400/800Gbps
+        sub-objects to accommodate the present trends of the industry
+        with respect to high-density ports/components and nodes. Organizations
+        now have components/interfaces/line cards with 100/400/800 Gbps
         throughput and nodes with a combined throughput exceeding
-        10Tbps. This cannot be represented in a field which is only 32-bit long. 
-        A 32-bit field can only represent a max throughput of 4Gbps (2 ^ 32 bps).
+        10 Tbps. This cannot be represented in a field that is only 32 bits long.
+        A 32-bit field can only represent a max throughput of 4 Gbps (2^32 bps).
         To address this, we define a "wider" 64-bit Sub-Object
         format.
       </t>
@@ -719,12 +722,23 @@ Trace complete.
             Messages with Environmental Information, with an Extended Echo Reply.
             <ul>
               <li>
-                Receiver (receiver.py) — waits for incoming data. Requires two arguments: (0 or 1) <br />
+                Receiver (receiver.py) -- waits for incoming data. Requires two arguments: (0 or 1) <br />
                 --interfaceIdentifyFlag: Tells the receiver to include the Interface Identification Object <xref target="RFC8335" /> in the response or not <br />
                 --greenFlag: Tells the receiver to include the Environmental Information Object (this document) in the response or not
               </li>
               <li>
-                Sender (sender.py) — connects to the receiver and sends data. Simply sends an ICMP Extended Echo Request to the receiver.py
+                Sender (sender.py) -- connects to the receiver and sends data. Simply sends an ICMP Extended Echo Request to the receiver.py
+              </li>
+              <li>
+                As an experimental extension, this implementation also
+                demonstrates repurposing the unused value 7 of the Extended
+                Echo Reply "State" field <xref target="RFC8335" /> to signal
+                that the reply carries only the Environmental Information
+                Object, without an Interface Identification Object. The
+                unused "Res" field <xref target="RFC8335" /> is also being
+                considered for this same purpose. This is
+                not currently part of this specification; see
+                <xref target="limitations" />.
               </li>
             </ul>
           </t>
@@ -745,16 +759,16 @@ Trace complete.
         other syntax problems may result in buffer overruns.
       </t>
       <t>
-        This document does not define the conditions under which a router 
-        sends an ICMP message. Therefore, it does not expose routers to any 
-        new denial-of-service attacks.  Routers may need to limit the rate at
+        This document does not define the conditions under which a node
+        sends an ICMP message. Therefore, it does not expose nodes to any
+        new denial-of-service attacks.  Nodes may need to limit the rate at
         which ICMP messages are sent.
       </t>
       <t>
-        The extensions defined in this document allows a router to append 
-        environmental sustainability information to multi-part ICMP messages, 
+        The extensions defined in this document allow a node to append
+        environmental sustainability information to multi-part ICMP messages,
         and therefore can provide the user of the traceroute and ping applications
-        with additional information.  
+        with additional information.
       </t>
       <t>
         The intended field of use for the extensions defined in this document
@@ -764,11 +778,11 @@ Trace complete.
         uses.
       </t>
       <t>
-        Some of the additional information provided, as e.g., power draw information, 
-        have privacy considerations. For example, behavioral considerations of the 
-        devices, or estimating other node and network attributes from the power or 
-        energy data. Other things like identification of the node, deducing node 
-        usage patterns are some more privacy concerns that can be related to the 
+        Some of the additional information provided, e.g., power draw information,
+        has privacy considerations. For example, behavioral considerations of the
+        devices, or estimating other node and network attributes from the power or
+        energy data. Other things like identification of the node, or deducing node
+        usage patterns, are some more privacy concerns that can be related to the
         information.
       </t>
       <t>
@@ -788,15 +802,15 @@ Trace complete.
         is destined to go out of the AD.
       </t>
       <t>
-        When environmental information are limited to the same AD, it can be considered 
-        that they can be generated from a valid source and will have integrity.
+        When environmental information is limited to the same AD, it can be considered
+        that it can be generated from a valid source and will have integrity.
       </t>
       <t>
         High-fidelity reporting of power draw for the targeted node's memory, cache, hardware 
         security module, or other sensitive component could allow an attacker to perform a 
         remote side-channel attack (i.e., using differential power analysis) during cryptographic 
-        operations. This attack would allow the adversary to extract the network node's secret key(s) 
-        or other sensitive data.  There are a couple of ways of mitigating this type of attack; 
+        operations. This attack would allow the adversary to extract the network node's secret key(s)
+        or other sensitive data.  There are a couple of ways of mitigating this type of attack:
         exclude power metrics for components that process sensitive data or provide countermeasures
         that introduce noise in the reported power metrics (e.g., software that demarcates sensitive data 
         which signals the processing hardware to treat this data with algorithmic noise).
@@ -844,6 +858,13 @@ Trace complete.
         an active IETF work item that has not yet been published as an RFC; its
         text, including the passage referenced above, may still change before
         publication. This section should be revisited if that happens.
+      </t>
+      <t>
+        One implementation (see Section on Implementation Status) has
+        experimented with working around this limitation by repurposing an
+        unused value of the Extended Echo Reply "State" field to signal that
+        the reply carries only the Environmental Information Object, without
+        an Interface Identification Object.
       </t>
     </section>
 
@@ -960,19 +981,19 @@ Trace complete.
   <back>
     <references title="Normative References">
 
+      &RFC.0792;
       &RFC.2119;
+      &RFC.4443;
       &RFC.4884;
       &RFC.8174;
       &RFC.8335;
-            
+      &RFC.9562;
+
     </references>
-    
+
     <references title="Informative References">
 
-      &RFC.4122;
       &RFC.5927;
-      &RFC.0792;
-      &RFC.4443;
       &RFC.8799;
       &RFC.9547;
       &I-D.wkumari-intarea-safe-limited-domains;
@@ -1003,10 +1024,10 @@ Trace complete.
         </front>
       </reference>
 
-      <reference anchor="EERC-ISO14001:2015" target="https://www.iso.org/standard/60857.html">
+      <reference anchor="EERC-ISO14001-2015" target="https://www.iso.org/standard/60857.html">
         <front>
           <title>ISO 14001:2015 Environmental management systems. Requirements with guidance for use</title>
-          <author initials="" surname="" fullname="International Organisation for Standardisation"></author>
+          <author initials="" surname="" fullname="International Organization for Standardization"></author>
           <date month="September" year="2015"/>
         </front>
       </reference>
@@ -1021,7 +1042,7 @@ Trace complete.
       <reference anchor="EERC-EEE" target="https://standards.ieee.org/ieee/802.3az/4270/">
         <front>
           <title>IEEE Standard for Information technology-- Local and metropolitan area networks-- Specific requirements-- Part 3: CSMA/CD Access Method and Physical Layer Specifications Amendment 5: Media Access Control Parameters, Physical Layers, and Management Parameters for Energy-Efficient Ethernet</title>
-          <author initials="" surname="" fullname="International Organisation for Standardisation"></author>
+          <author initials="" surname="" fullname="Institute of Electrical and Electronics Engineers"></author>
           <date month="October" day="27" year="2010"/>
         </front>
         <seriesInfo name="IEEE Std" value=" 802.3az-2010 (Amendment to IEEE Std 802.3-2008)" />
