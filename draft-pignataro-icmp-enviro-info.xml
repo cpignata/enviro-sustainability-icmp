@@ -313,7 +313,9 @@
       <t>
         A single ICMP message can contain zero, one, or multiple instances of 
         Environmental Information Objects.  The C-Type further identifies the 
-        information fields carried.
+        information fields carried. The Environmental Information Object can
+        be appended to any existing ICMP Extension Objects, subject to the
+        limitations discussed in Section 10.
       </t>
       <t>
         A single instance of the Environmental Information Object can convey 
@@ -718,7 +720,7 @@ Trace complete.
             <ul>
               <li>
                 Receiver (receiver.py) — waits for incoming data. Requires two arguments: (0 or 1) <br />
-                --probeFlag: Tells the receiver to include the Interface Identification Object <xref target="RFC8335" /> in the response or not <br />
+                --interfaceIdentifyFlag: Tells the receiver to include the Interface Identification Object <xref target="RFC8335" /> in the response or not <br />
                 --greenFlag: Tells the receiver to include the Environmental Information Object (this document) in the response or not
               </li>
               <li>

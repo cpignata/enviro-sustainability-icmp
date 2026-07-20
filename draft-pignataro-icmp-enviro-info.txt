@@ -5,12 +5,12 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Experimental                                  J. Parikh
-Expires: 21 January 2027                                 Arista Networks
+Expires: 20 January 2027                                 Arista Networks
                                                                R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                            20 July 2026
+                                                            19 July 2026
 
 
              ICMP Extensions for Environmental Information
@@ -47,13 +47,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 January 2027.
+   This Internet-Draft will expire on 20 January 2027.
 
 
 
 
 
-Pignataro, et al.        Expires 21 January 2027                [Page 1]
+Pignataro, et al.        Expires 20 January 2027                [Page 1]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 21 January 2027                [Page 2]
+Pignataro, et al.        Expires 20 January 2027                [Page 2]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -165,7 +165,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027                [Page 3]
+Pignataro, et al.        Expires 20 January 2027                [Page 3]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -221,7 +221,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027                [Page 4]
+Pignataro, et al.        Expires 20 January 2027                [Page 4]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -277,7 +277,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027                [Page 5]
+Pignataro, et al.        Expires 20 January 2027                [Page 5]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -308,7 +308,9 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
    A single ICMP message can contain zero, one, or multiple instances of
    Environmental Information Objects.  The C-Type further identifies the
-   information fields carried.
+   information fields carried.  The Environmental Information Object can
+   be appended to any existing ICMP Extension Objects, subject to the
+   limitations discussed in Section 10.
 
    A single instance of the Environmental Information Object can convey
    one of the information elements defined in Section 5.2 from each
@@ -329,14 +331,14 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    ~                        Object payload                         ~
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
 
-         Figure 1: ICMP Environmental Information Extension Format
 
 
-
-Pignataro, et al.        Expires 21 January 2027                [Page 6]
+Pignataro, et al.        Expires 20 January 2027                [Page 6]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
+
+         Figure 1: ICMP Environmental Information Extension Format
 
    (1) ICMP Extension Header
 
@@ -381,18 +383,22 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    The ICMP Environmental Information Extension Object header has the
    following format:
 
+
+
+
+
+
+
+Pignataro, et al.        Expires 20 January 2027                [Page 7]
+
+Internet-Draft         ICMP Enviro Info Extensions             July 2026
+
+
                         1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |             Length            | Class-Num=TBA | C-Type=1-255  |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-
-
-Pignataro, et al.        Expires 21 January 2027                [Page 7]
-
-Internet-Draft         ICMP Enviro Info Extensions             July 2026
-
 
         Figure 2: Environmental Information Extension Object Header
 
@@ -436,19 +442,16 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
        A Class-Num of TBA and a C-Type of 2 are specified.
 
-       The Length is 12 if the object contains this payload.  A Length
-       value of 4 indicates that it is unavailable.
 
 
 
-
-
-
-
-Pignataro, et al.        Expires 21 January 2027                [Page 8]
+Pignataro, et al.        Expires 20 January 2027                [Page 8]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
+
+       The Length is 12 if the object contains this payload.  A Length
+       value of 4 indicates that it is unavailable.
 
        The returned value is the node-level present throughput, which is
        a magnitude that may be directly displayed, and is expressed in
@@ -498,10 +501,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-
-
-
-Pignataro, et al.        Expires 21 January 2027                [Page 9]
+Pignataro, et al.        Expires 20 January 2027                [Page 9]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -557,7 +557,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 10]
+Pignataro, et al.        Expires 20 January 2027               [Page 10]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -613,7 +613,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 11]
+Pignataro, et al.        Expires 20 January 2027               [Page 11]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -669,7 +669,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 12]
+Pignataro, et al.        Expires 20 January 2027               [Page 12]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -725,15 +725,16 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 13]
+Pignataro, et al.        Expires 20 January 2027               [Page 13]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
        *  Receiver (receiver.py) — waits for incoming data.  Requires
           two arguments: (0 or 1)
-          --probeFlag: Tells the receiver to include the Interface
-          Identification Object [RFC8335] in the response or not
+          --interfaceIdentifyFlag: Tells the receiver to include the
+          Interface Identification Object [RFC8335] in the response or
+          not
           --greenFlag: Tells the receiver to include the Environmental
           Information Object (this document) in the response or not
 
@@ -777,15 +778,15 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    transportation of the environmental information to a single
    administrative domain (AD).  But, based on [RFC8799], limiting a
    protocol's functionality doesn't mean that it will be secure.  So,
-   this particular document, which defines "a modified ICMP message with
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 14]
+Pignataro, et al.        Expires 20 January 2027               [Page 14]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
+   this particular document, which defines "a modified ICMP message with
    environmental information", can be classified as a FAIL-OPEN protocol
    [I-D.wkumari-intarea-safe-limited-domains].  That is, the interfaces
    of administrative domain border nodes, facing towards the open
@@ -831,17 +832,19 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
    from the Extended Echo Request into the Extended Echo Reply
    unmodified.
 
-   [I-D.ietf-intarea-rfc8335bis], which is expected to obsolete
-   [RFC8335], clarifies this point: the requirement for exactly one
-   Interface Identification Object applies specifically to the PROBE
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 15]
+
+
+Pignataro, et al.        Expires 20 January 2027               [Page 15]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
+   [I-D.ietf-intarea-rfc8335bis], which is expected to obsolete
+   [RFC8335], clarifies this point: the requirement for exactly one
+   Interface Identification Object applies specifically to the PROBE
    application, and explicitly states that "the behavior when [the
    Extension Structure] contains a different Extension Object is not
    defined by this memo", citing [I-D.ietf-6man-icmpv6-reflection] as an
@@ -890,10 +893,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-
-
-
-Pignataro, et al.        Expires 21 January 2027               [Page 16]
+Pignataro, et al.        Expires 20 January 2027               [Page 16]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -949,7 +949,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 17]
+Pignataro, et al.        Expires 20 January 2027               [Page 17]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -1005,7 +1005,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 18]
+Pignataro, et al.        Expires 20 January 2027               [Page 18]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -1061,7 +1061,7 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 19]
+Pignataro, et al.        Expires 20 January 2027               [Page 19]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -1117,7 +1117,7 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 20]
+Pignataro, et al.        Expires 20 January 2027               [Page 20]
 
 Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
@@ -1173,4 +1173,4 @@ Internet-Draft         ICMP Enviro Info Extensions             July 2026
 
 
 
-Pignataro, et al.        Expires 21 January 2027               [Page 21]
+Pignataro, et al.        Expires 20 January 2027               [Page 21]
