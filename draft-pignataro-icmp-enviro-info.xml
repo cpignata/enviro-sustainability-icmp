@@ -242,11 +242,12 @@
           requiring a separate, out-of-band correlation step that maps
           discovered hop identifiers (e.g., IP addresses, which can be
           numerous, ephemeral, or not readily attributable to a specific
-          piece of equipment) back to inventory records. This is
-          particularly valuable across administrative or vendor boundaries,
-          or whenever the party running the diagnostic tool does not have
-          independent access to the inventory that would otherwise be
-          needed to make that association.
+          piece of equipment) back to inventory records. This is particularly
+          valuable across administrative or vendor boundaries (provided edge
+          nodes are configured to allow the ICMP messages and extensions defined
+          here (see Security Considerations)), or whenever the party running the
+          diagnostic tool does not have independent access to the inventory that
+          would otherwise be needed to make that association.
         </t>
         <t>
           ICMP is universally implemented, stateless, and tool-agnostic enabling
