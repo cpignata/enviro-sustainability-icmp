@@ -232,6 +232,24 @@
           <xref target="RFC8335" />) for real-time, per-hop context.
         </t>
         <t>
+          This is particularly relevant for information that does not
+          change often and is already known through separate inventories,
+          such as the EERC ecolabel/certification information defined in
+          <xref target="ctype" />. Even though such information is largely
+          static, obtaining it through the same live path-discovery
+          mechanism directly associates it with the specific node
+          encountered along the current, actual forwarding path, without
+          requiring a separate, out-of-band correlation step that maps
+          discovered hop identifiers (e.g., IP addresses, which can be
+          numerous, ephemeral, or not readily attributable to a specific
+          piece of equipment) back to inventory records. This is particularly
+          valuable across administrative or vendor boundaries (provided edge
+          nodes are configured to allow the ICMP messages and extensions defined
+          here (see Security Considerations)), or whenever the party running the
+          diagnostic tool does not have independent access to the inventory that
+          would otherwise be needed to make that association.
+        </t>
+        <t>
           ICMP is universally implemented, stateless, and tool-agnostic enabling
           lightweight environmental telemetry without new protocols, APIs, or credentials.
         </t>
@@ -245,6 +263,67 @@
           existing methods.
         </t>
       </section>
+    </section>
+
+    <section title="Experiment Goals and Success Criteria" anchor="experiment-goals">
+      <t>
+        This document targets the Experimental category. This section makes
+        that explicit by stating the goals of the experiment and the
+        criteria by which it can be judged.
+      </t>
+      <t>
+        The goals of the experiment are to determine, through real
+        implementation and operational experience:
+        <list style="numbers">
+          <t>
+            Whether embedding lightweight, per-hop environmental
+            sustainability metrics directly in ICMP responses provides
+            operationally useful visibility, without requiring a new
+            out-of-band protocol, API, or query mechanism.
+          </t>
+          <t>
+            Whether the mechanism can be safely confined to a single
+            administrative domain, as intended (see Security
+            Considerations), without unintended leakage or operational
+            side effects.
+          </t>
+          <t>
+            Whether the specific metrics defined herein (power, throughput,
+            EERC) are the right set, or whether experience shows they
+            should be revised, extended, or narrowed.
+          </t>
+        </list>
+      </t>
+      <t>
+        The experiment will be considered successful, and a candidate for
+        further standardization (e.g., on the Standards Track), if:
+        <list style="numbers">
+          <t>
+            Multiple independent, interoperable implementations exist and
+            demonstrate the extension working as specified. As documented
+            in the Implementation Status section, this criterion is
+            already met by two independent proof-of-concept
+            implementations.
+          </t>
+          <t>
+            Operational experience or deployment feedback indicates that
+            the information is actually used to inform a real decision
+            (e.g., the path-selection example in Sample Use Case), rather
+            than being collected but unused.
+          </t>
+          <t>
+            No significant, unmitigated security or operational issues
+            (e.g., denial of service, information leakage outside the
+            administrative domain) are observed during experimentation.
+          </t>
+        </list>
+        Conversely, if experience shows that the mechanism is not adopted
+        in practice, that the metrics chosen are not useful, or that
+        unresolved security or operational issues emerge, that outcome is
+        itself a valid and useful result of the experiment, and would
+        inform a decision not to progress the work further, or to revise
+        it substantially.
+      </t>
     </section>
 
     <section title="Transport Options for Environmental Information">
@@ -672,6 +751,59 @@
         Hence, for the ease of implementation, we have decided to just define a 64-bit
         sub-object where we need one, and skip defining a 32-bit sub-object for information
         like throughput, etc.
+      </t>
+    </section>
+
+    <section title="Provisioning Considerations" anchor="provisioning">
+      <t>
+        This document defines the wire format used to convey environmental
+        sustainability metrics in an ICMP extension object. It does not
+        define how a node originating such an object obtains the
+        underlying values in the first place; that is a local,
+        implementation-specific matter and out of scope for this document.
+        This section discusses that gap qualitatively, without mandating a
+        specific mechanism.
+      </t>
+      <t>
+        The metrics defined in this document fall into two categories with
+        different provisioning implications:
+      </t>
+      <t>
+        <list style="symbols">
+          <t>
+            Present/idle power (<xref target="ctype" />, C-Types 1 and 4)
+            and throughput (C-Types 2 and 5) are dynamic metrics. On many
+            platforms, values of this kind are already available from
+            existing on-box telemetry (e.g., power-supply and sensor
+            readings, interface counters) that is collected for purposes
+            independent of this document, such as local monitoring,
+            alarms, or other telemetry export mechanisms. This document
+            does not introduce a new metering requirement; it defines an
+            additional channel through which values a node may already be
+            collecting can also be reported in-band, per hop, alongside a
+            connectivity probe.
+          </t>
+          <t>
+            EERC information (C-Type 3) is, by contrast, essentially
+            static per hardware and software revision, and is not expected
+            to be measured at request time. It is expected to be
+            provisioned once, e.g., at manufacturing time, via device
+            configuration, or from a local asset/inventory database, and
+            then simply read back when an Environmental Information Object
+            is populated.
+          </t>
+        </list>
+      </t>
+      <t>
+        In both cases, this document deliberately does not mandate a
+        specific provisioning mechanism (e.g., a particular YANG model,
+        CLI, or factory-configuration process); how a node populates the
+        values it reports is a local implementation and management
+        matter. If a value is not provisioned, not known, or not
+        applicable at the time an Environmental Information Object is
+        generated, the corresponding sub-object MUST be reported as
+        unavailable (a Length of 4, as already specified for each C-Type
+        in <xref target="ctype" />), rather than a fabricated value.
       </t>
     </section>
 
