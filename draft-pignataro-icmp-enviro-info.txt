@@ -976,9 +976,10 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2026
    only strip off the extension objects and only forward the ICMP
    message if it is destined to go out of the AD.
 
-   When environmental information is limited to the same AD, it can be
-   considered that it can be generated from a valid source and will have
-   integrity.
+   ICMP messages are not authenticated and can be forged.  Environmental
+   information has no integrity protection and should be treated as
+   informational; confining it to one administrative domain reduces, but
+   does not eliminate, this exposure.
 
    High-fidelity reporting of power draw for the targeted node's memory,
    cache, hardware security module, or other sensitive component could
@@ -996,7 +997,6 @@ Internet-Draft         ICMP Enviro Info Extensions          October 2026
    Finally, this document does not specify an authentication mechanism
    for the extension that it defines.  Application developers should be
    aware of various ICMP attacks [RFC5927].
-
 
 
 

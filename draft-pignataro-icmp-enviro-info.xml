@@ -1013,8 +1013,10 @@ Trace complete.
         is destined to go out of the AD.
       </t>
       <t>
-        When environmental information is limited to the same AD, it can be considered
-        that it can be generated from a valid source and will have integrity.
+        ICMP messages are not authenticated and can be forged.  Environmental
+        information has no integrity protection and should be treated as
+        informational; confining it to one administrative domain reduces, but
+        does not eliminate, this exposure.
       </t>
       <t>
         High-fidelity reporting of power draw for the targeted node's memory, cache, hardware 
