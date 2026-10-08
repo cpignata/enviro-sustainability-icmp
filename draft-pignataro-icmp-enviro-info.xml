@@ -950,9 +950,31 @@ Trace complete.
       </t>
       <t>
         This document does not define the conditions under which a node
-        sends an ICMP message. Therefore, it does not expose nodes to any
-        new denial-of-service attacks.  Nodes may need to limit the rate at
-        which ICMP messages are sent.
+        sends an ICMP message, and defines no new trigger for ICMP
+        messages; see the discussion of message size below.  Nodes may
+        need to limit the rate at which ICMP messages are sent.
+      </t>
+      <t>
+        A message carrying this extension is larger than the same message
+        without it.  Part of the increase is inherited from
+        <xref target="RFC4884" />, which requires the "original datagram"
+        field to contain at least 128 octets whenever an Extension
+        Structure is appended, and which applies equally to every ICMP
+        extension.  The increase specific to this document is the length
+        of the Environmental Information Objects.  <xref target="RFC4884" /> requires
+        that the total length of the ICMP message, including all
+        extensions, not exceed the minimum reassembly buffer size (576
+        octets for ICMPv4 or 1280 octets for ICMPv6; see Sections 5.3 and
+        7 of <xref target="RFC4884" />), which bounds the growth of a
+        response relative to the packet that triggered it.  A node MUST
+        NOT include Component-level instances that would cause this limit
+        to be exceeded.
+      </t>
+      <t>
+        Rate limiting of ICMP generation and filtering of ICMP extensions
+        at administrative domain borders are general considerations for
+        any use of ICMP extensions, not specific to this one.  This
+        document defines no additional requirements in these areas.
       </t>
       <t>
         The extensions defined in this document allow a node to append
@@ -992,8 +1014,10 @@ Trace complete.
         is destined to go out of the AD.
       </t>
       <t>
-        When environmental information is limited to the same AD, it can be considered
-        that it can be generated from a valid source and will have integrity.
+        ICMP messages are not authenticated and can be forged.  Environmental
+        information has no integrity protection and should be treated as
+        informational; confining it to one administrative domain reduces, but
+        does not eliminate, this exposure.
       </t>
       <t>
         High-fidelity reporting of power draw for the targeted node's memory, cache, hardware 
