@@ -8,6 +8,7 @@
 <!ENTITY RFC.4443 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4443.xml">
 <!ENTITY RFC.5927 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5927.xml">
 <!ENTITY RFC.4884 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4884.xml">
+<!ENTITY RFC.7279 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7279.xml">
 <!ENTITY RFC.8174 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC.8335 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8335.xml">
 <!ENTITY RFC.8799 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8799.xml">
@@ -224,7 +225,7 @@
         </list>
       </t>
 
-      <section title="Why is ICMP suitable?">
+      <section title="Why is ICMP suitable?" anchor="why-icmp">
         <t>
           Environmental data already exists in inventories; the novelty is
           surfacing it along the path of live connectivity probes (e.g., ping,
@@ -1081,6 +1082,48 @@ Trace complete.
       </t>
     </section>
 
+    <section title="Acceptable Use of ICMP" anchor="acceptable-use">
+      <t>
+        RFC 7279 (BCP 189) <xref target="RFC7279" /> provides guidance on the
+        acceptable use of ICMP, including how it may be extended; Section 2.3
+        of <xref target="RFC7279" /> asks that extensions follow
+        <xref target="RFC4884" />.  This document does not add new message
+        types or codes.  It defines an extension object appended to existing
+        messages using the RFC 4884 Extension Structure, and adds no new
+        trigger, request, or exchange.
+      </t>
+      <t>
+        Section 2 of <xref target="RFC7279" /> also says ICMP SHOULD NOT
+        implement a general-purpose routing or network management protocol,
+        while recognizing its role in conveying dynamic information about a
+        network.  This extension is neither routing nor management: it doesn't
+        configure or control anything; it carries read-only, per-hop
+        information in an existing response, for administrative
+        troubleshooting.  The information it carries is of two kinds:
+        <list style="symbols">
+          <t>
+            Power draw and throughput are dynamic information about a node,
+            the kind described in the second category of Section 2 of
+            <xref target="RFC7279" />.
+          </t>
+          <t>
+            EERC is static, but like the interface and next-hop identification
+            extension that Section 2.3 of <xref target="RFC7279" /> cites, it
+            describes the responding node and is carried to associate that
+            information with the node actually on the path (see
+            <xref target="why-icmp" />).
+          </t>
+        </list>
+      </t>
+      <t>
+        This document considers this an appropriate use of ICMP under
+        <xref target="RFC7279" />.  As <xref target="RFC7279" /> notes
+        (Sections 2.1.1 and 4), ICMP is frequently filtered, unauthenticated,
+        and spoofable, so the information is best-effort; see Security
+        Considerations.
+      </t>
+    </section>
+
     <section title="IANA Considerations">
       <t>
         IANA is requested to assign the following object Class-num in the ICMP 
@@ -1198,6 +1241,7 @@ Trace complete.
       &RFC.2119;
       &RFC.4443;
       &RFC.4884;
+      &RFC.7279;
       &RFC.8174;
       &RFC.8335;
       &RFC.9562;
